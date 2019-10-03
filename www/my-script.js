@@ -15,6 +15,10 @@ divContainer.append(header);
 let section = document.createElement('section');
 divContainer.append(section);
 
+//ASIDE
+let aside = document.createElement('aside');
+divContainer.append(aside);
+
 //-------------- OBJECT CREATE-------------//
 
 //--my array of contact objects--//
@@ -86,6 +90,63 @@ for (contactItem of arrayOfContacts){
 	section.append(contactContainer);
 }
 
+//------------ Add Contact box ---------------//
+
+let addContactContainer = document.createElement('div');
+addContactContainer.setAttribute('class','add-contact-container');
+aside.append(addContactContainer);
+
+// name
+let input = document.createElement('input');
+input.setAttribute('type','text');
+input.setAttribute('placeholder','Skriv in ett namn här');
+input.setAttribute('class','add-contact-input-name');
+addContactContainer.append(input);
+// phone
+let input2 = document.createElement('input');
+input2.setAttribute('type','text');
+input2.setAttribute('placeholder','Skriv in ett nummer här');
+input2.setAttribute('class','add-contact-input-phone');
+addContactContainer.append(input2);
+// contact
+// phone
+let input3 = document.createElement('input');
+input3.setAttribute('type','text');
+input3.setAttribute('placeholder','Skriv in en kontakt här');
+input3.setAttribute('class','add-contact-input-contact');
+addContactContainer.append(input3);
+
+// submit button
+let button = document.createElement('button');
+button.setAttribute('type','button');
+button.setAttribute('class','add-contact-submit-button');
+button.innerHTML='lägg till';
+addContactContainer.append(button);
+
+// Adding a contact
+window.addEventListener('click', e =>{
+  if(e.target.closest('.add-contact-submit-button')){
+
+		let addContactName = document.querySelector('.add-contact-input-name').value;
+		let addContactPhone = document.querySelector('.add-contact-input-phone').value;
+		let addContactContact = document.querySelector('.add-contact-input-contact').value;
+	//	alert(addContactName+' '+addContactPhone+ ' '+addContactContact );
+	
+		let newContact = new createContact(addContactName,[addContactPhone],[addContactContact]);
+		arrayOfContacts.push(newContact); 
+
+		console.log(arrayOfContacts);
+
+	}
+});
+
+
+
+
+
+
+
+
 
 
 /*------------ GAMLA ---------*//*
@@ -107,10 +168,6 @@ let contactInfoList = document.createElement('ul');
 		contactInfoList.append(contactInfoListPhone);
 	}
 */
-
-
-
-
 
 /* EVENT LISTENER
 window.addEventListener('click', e =>{

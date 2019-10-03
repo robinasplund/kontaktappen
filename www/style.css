@@ -16,6 +16,8 @@ header{
 
 section{
     background-color:green;
+    width:60%;
+    display:inline-block;
 }
 
 .contact-container{
@@ -24,4 +26,36 @@ section{
 }
 .contact-container .name{
     background-color:red;
+}
+
+
+
+aside{
+    background-color:gray;
+    width:40%;
+    height:400px;
+    display:inline-block;
+    vertical-align:top;
+}
+.add-contact-container{
+    border:solid black 2px;
+}
+.add-contact-input-name{
+    width:50%;
+    margin-left:25%;
+    margin-top:50px;
+}
+.add-contact-input-phone{
+    width:50%;
+    margin-left:25%;   
+}
+.add-contact-input-contact{
+    width:50%;
+    margin-left:25%;   
+}
+.add-contact-submit-button{
+    display:block;
+    margin:auto;
+    margin-top:20px;
+    cursor:pointer;
 }
