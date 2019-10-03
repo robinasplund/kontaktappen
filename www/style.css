@@ -1,0 +1,27 @@
+body{
+    background-color:rgb(233, 220, 220);
+}
+
+.container{
+    /*border:solid black 3px;*/
+}
+
+header{
+    background-color:orange;
+    text-align:center;
+    font-family: Helvetica;
+    font-size:30px;
+    padding:3%;
+}
+
+section{
+    background-color:green;
+}
+
+.contact-container{
+    border:solid orange 2px;
+    width:200px;
+}
+.contact-container .name{
+    background-color:red;
+}
