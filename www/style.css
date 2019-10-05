@@ -65,6 +65,13 @@ aside{
     background-color:white;
     border:solid red 2px;
     height:400px;
-    text-align:center;
     padding-top:40px;
+}
+.edit-contact-container input{
+    display:block;
+    margin:auto;
+}
+.edit-contact-submit-button{
+    margin-left:45%;
+    margin-top:30px;
 }
