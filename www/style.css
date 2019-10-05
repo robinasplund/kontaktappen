@@ -59,3 +59,12 @@ aside{
     margin-top:20px;
     cursor:pointer;
 }
+
+
+.edit-contact-container{
+    background-color:white;
+    border:solid red 2px;
+    height:400px;
+    text-align:center;
+    padding-top:40px;
+}
