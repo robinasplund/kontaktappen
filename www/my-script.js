@@ -164,7 +164,7 @@ addContactContainer.append(button);
 window.addEventListener('click', e =>{
   if(e.target.closest('.add-contact-submit-button')){
 
-		let addContactId = arrayOfContacts.length+1; 
+		let addContactId = arrayOfContacts.length; 
 		let addContactName = document.querySelector('.add-contact-input-name').value;
 		let addContactPhone = document.querySelector('.add-contact-input-phone').value;
 		let addContactContact = document.querySelector('.add-contact-input-contact').value;
