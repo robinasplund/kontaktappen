@@ -45,15 +45,15 @@ const contactPrototype ={
 	id:'',
 	name:'',
 	phoneNumbers:[],
-	personalContacts:[]
+	emails:[]
 }
 
-function createContact(id,name,phoneNumbers,personalContacts){
+function createContact(id,name,phoneNumbers,emails){
 	let newInstance = Object.create(contactPrototype);
 	newInstance.id=id;
 	newInstance.name=name;
 	newInstance.phoneNumbers=phoneNumbers;
-	newInstance.personalContacts=personalContacts;
+	newInstance.emails=emails;
 	return newInstance;
 }
 
@@ -121,9 +121,9 @@ function displayContacts(){
 		let ul2 = document.createElement('ul');
 		ul2.setAttribute('class','email-list');
 		contactContainer.append(ul2);
-		for(personalContact of contactItem.personalContacts ){
+		for(email of contactItem.emails ){
 			let li = document.createElement('li');
-			li.innerHTML= personalContact;
+			li.innerHTML= email;
 			ul2.append(li);
 		}
 	
@@ -221,7 +221,7 @@ window.addEventListener('click', e =>{
 			for(let key of contactToEdit){
 				contactToEditName= key.name;
 				contactToEditPhone= key.phoneNumbers;
-				contactToEditEmail= key.personalContacts;
+				contactToEditEmail= key.emails;
 			}
 
 			let input4=document.createElement('input');
@@ -251,9 +251,9 @@ window.addEventListener('click', e =>{
 		
 					let editedContactName = document.querySelector('.edit-contact-input-name').value;
 					let editedContactPhone = document.querySelector('.edit-contact-input-phone').value;
-					let editedContactContact = document.querySelector('.edit-contact-input-email').value;
+					let editedContactEmail = document.querySelector('.edit-contact-input-email').value;
 
-					let editedContact = new createContact(contactToEdit[0].id,editedContactName,[editedContactPhone],[editedContactContact]);
+					let editedContact = new createContact(contactToEdit[0].id,editedContactName,[editedContactPhone],[editedContactEmail]);
 				
 					let indexOfObject=arrayOfContacts.findIndex(x => x.id === contactToEdit[0].id);
 
