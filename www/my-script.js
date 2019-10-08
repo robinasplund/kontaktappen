@@ -55,9 +55,7 @@ function displayContacts(){
 	section.innerHTML ='';
 	for (contactItem of arrayOfContacts){
 
-
-
-		console.log(contactItem);
+		//console.log(contactItem);
 	
 		let contactContainer =  document.createElement('div');
 		contactContainer.setAttribute('class','contact-container');
@@ -173,7 +171,7 @@ window.addEventListener('click', e =>{
 		let newContact = new createContact(addContactId,addContactName,[addContactPhone],[addContactContact]);
 		arrayOfContacts.push(newContact); 
 
-		console.log(arrayOfContacts);
+		//console.log(arrayOfContacts);
 		displayContacts();
 	}
 });
@@ -226,27 +224,48 @@ window.addEventListener('click', e =>{
 			button2.setAttribute('class','edit-contact-submit-button');
 			button2.innerHTML='spara';
 			editContactContainer.append(button2);
+
+
+			window.addEventListener('click', e => {
+				if(e.target.closest('.edit-contact-submit-button')){
 		
+					//alert('hej');
+					let editedContactName = document.querySelector('.edit-contact-input-name').value;
+					let editedContactPhone = document.querySelector('.edit-contact-input-phone').value;
+					let editedContactContact = document.querySelector('.edit-contact-input-email').value;
+
+					let editedContact = new createContact(contactIdInFocus,editedContactName,[editedContactPhone],[editedContactContact]);
+					console.log(editedContact);
+					
+
+					//let x=arrayOfContacts.findIndex(x => x.id === '2');
+					//console.log(x);
+
+					//console.log(contactToEdit[0].id+'to edit');
+
+					let x=arrayOfContacts.findIndex(x => x.id === contactToEdit[0].id);
+					console.log(x);
+
+
+					arrayOfContacts.splice(x,1,editedContact);
+					
+					displayContacts();
+
+				}
+			});
+
+
+
+
+
+
+
+		}
+	});
+
 	
-			//displayContacts();
-		}
-	});
-
-	window.addEventListener('click', e => {
-		if(e.target.closest('.edit-contact-submit-button')){
 
 
-			let editedContactName = document.querySelector('.edit-contact-input-name').value;
-			let editedContactPhone = document.querySelector('.edit-contact-input-phone').value;
-			let editedContactContact = document.querySelector('.edit-contact-input-email').value;
-
-			let editedContact = new createContact(contactIdInFocus,editedContactName,[editedContactPhone],[editedContactContact]);
-			arrayOfContacts.splice(contactIdInFocus,1,editedContact);  //IMPORTANT !!!! THIS WONT WORK WHEN ARRAY GET SORTED LATER ON
-
-		displayContacts();
-
-		}
-	});
 
 
 /* EVENT LISTENER
