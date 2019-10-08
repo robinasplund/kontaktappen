@@ -29,6 +29,7 @@ divContainer.append(section);
 
 // aside
 let aside = document.createElement('aside');
+aside.setAttribute('id','aside-container');
 divContainer.append(aside);
 
 
@@ -58,14 +59,16 @@ function createContact(id,name,phoneNumbers,personalContacts){
 
 
 
-let manne = new createContact('0','Sven Bertilsson',['0462118787','099999999'],['kent','malin','gurra']);
+let manne = new createContact('0','Sven Bertilsson',['0462118787','099999999'],['kent@mail.com']);
 arrayOfContacts.push(manne);
 
-let robban = new createContact('1','robban aspland',['0799019897'],['sebbe','kristina']);
+let robban = new createContact('1','robban aspland',['0799019897'],['rob@hotmail.com','rob2@hotmail.com']);
 arrayOfContacts.push(robban);
 
-let bella = new createContact('2','bella beckström',['78654324'],['kajsa','kristina','åsa','jonas']);
+let bella = new createContact('2','bella beckström',['78654324'],['bella@yahoo.com','bella2@hotmail.com']);
 arrayOfContacts.push(bella );
+
+
 
 
 
@@ -156,21 +159,20 @@ aside.append(addContactContainer);
 // name
 let input = document.createElement('input');
 input.setAttribute('type','text');
-input.setAttribute('placeholder','Skriv in ett namn här');
+input.setAttribute('placeholder','namn');
 input.setAttribute('class','add-contact-input-name');
 addContactContainer.append(input);
 // phone
 let input2 = document.createElement('input');
 input2.setAttribute('type','text');
-input2.setAttribute('placeholder','Skriv in ett nummer här');
+input2.setAttribute('placeholder','telefonnummer');
 input2.setAttribute('class','add-contact-input-phone');
 addContactContainer.append(input2);
-// contact
-// phone
+// email
 let input3 = document.createElement('input');
 input3.setAttribute('type','text');
-input3.setAttribute('placeholder','Skriv in en kontakt här');
-input3.setAttribute('class','add-contact-input-contact');
+input3.setAttribute('placeholder','emailadress');
+input3.setAttribute('class','add-contact-input-email');
 addContactContainer.append(input3);
 
 // submit button
@@ -187,13 +189,10 @@ window.addEventListener('click', e =>{
 		let addContactId = idGenerator; 
 		let addContactName = document.querySelector('.add-contact-input-name').value;
 		let addContactPhone = document.querySelector('.add-contact-input-phone').value;
-		let addContactContact = document.querySelector('.add-contact-input-contact').value;
-	//	alert(addContactName+' '+addContactPhone+ ' '+addContactContact );
+		let addContactEmail = document.querySelector('.add-contact-input-email').value;
 	
-		let newContact = new createContact(addContactId,addContactName,[addContactPhone],[addContactContact]);
+		let newContact = new createContact(addContactId,addContactName,[addContactPhone],[addContactEmail]);
 		arrayOfContacts.push(newContact); 
-
-		//console.log(arrayOfContacts);
 		idGenerator++;
 		displayContacts();
 	}
@@ -208,6 +207,7 @@ window.addEventListener('click', e =>{
 
 	window.addEventListener('click', e => {
 		if(e.target.closest('.edit-contact-button')){
+
 
 			editContactContainer.innerHTML='';
 
