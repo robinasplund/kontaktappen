@@ -72,6 +72,8 @@ arrayOfContacts.push(bella );
 
 
 
+
+
 //-------- DISPLAY CONTACTS ARRAY IN THE DOM -------------//
 
 function displayContacts(){
@@ -150,7 +152,7 @@ window.addEventListener('click', e => {
 	}
 });
 
-//------------ Add Contact box ---------------//
+//------------ Add Contact ---------------//
 
 let addContactContainer = document.createElement('div');
 addContactContainer.setAttribute('class','add-contact-container');
