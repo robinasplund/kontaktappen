@@ -55,7 +55,7 @@ function displayContacts(){
 	section.innerHTML ='';
 	for (contactItem of arrayOfContacts){
 
-		//console.log(contactItem);
+		console.log(contactItem);
 	
 		let contactContainer =  document.createElement('div');
 		contactContainer.setAttribute('class','contact-container');
@@ -183,13 +183,10 @@ window.addEventListener('click', e =>{
 	editContactContainer.setAttribute('class','edit-contact-container');
 	aside.append(editContactContainer);
 
-
-	let contactIdInFocus; //------IMPORTANT VARIABLE----//
 	window.addEventListener('click', e => {
 		if(e.target.closest('.edit-contact-button')){
 
 			editContactContainer.innerHTML='';
-			contactIdInFocus=e.target.id;
 
 			let contactToEdit =arrayOfContacts.filter(function(object){
 				return object.id == e.target.id;
@@ -234,7 +231,7 @@ window.addEventListener('click', e =>{
 					let editedContactPhone = document.querySelector('.edit-contact-input-phone').value;
 					let editedContactContact = document.querySelector('.edit-contact-input-email').value;
 
-					let editedContact = new createContact(contactIdInFocus,editedContactName,[editedContactPhone],[editedContactContact]);
+					let editedContact = new createContact(contactToEdit[0].id,editedContactName,[editedContactPhone],[editedContactContact]);
 					console.log(editedContact);
 					
 
@@ -248,6 +245,8 @@ window.addEventListener('click', e =>{
 
 
 					arrayOfContacts.splice(x,1,editedContact);
+
+			
 					
 					displayContacts();
 
