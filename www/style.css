@@ -1,17 +1,20 @@
-body{
-    background-color:rgb(233, 220, 220);
-}
-
-.container{
-    /*border:solid black 3px;*/
-}
 
 header{
-    background-color:orange;
-    text-align:center;
-    font-family: Helvetica;
-    font-size:30px;
-    padding:3%;
+    background-color:#339966;
+}
+.logo{
+    display:inline-block;
+    padding-left:20px;
+}
+.logo img{
+    width:100px;
+    height:100px;
+}
+.heading{
+    display:inline-block;
+    vertical-align:top;
+    margin-left:30px;
+    font-family: 'Gloria Hallelujah', cursive;
 }
 
 section{

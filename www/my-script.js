@@ -1,15 +1,27 @@
+// ******** CREATING THE HTML BODY *************
 
 let body = document.querySelector('body');
 
-// CONTAINER DIV
+// container div
 let divContainer = document.createElement('div');
 divContainer.setAttribute('class', 'container');
 body.append(divContainer);
 
-// HEADER
+// header
 let header = document.createElement('header');
-header.innerHTML= 'Dat´z kontaktëen liste';
 divContainer.append(header);
+
+// logo
+let logo= document.createElement('div');
+logo.innerHTML= "<img src='./contact-logo.png'>";
+logo.setAttribute('class','logo');
+header.append(logo);
+
+// heading
+let heading = document.createElement('h2');
+heading.setAttribute('class','heading');
+heading.innerHTML="Dat´z kontaktëen liste";
+header.append(heading);
 
 // SECTION 
 let section = document.createElement('section');
