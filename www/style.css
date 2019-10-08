@@ -17,19 +17,59 @@ header{
     font-family: 'Gloria Hallelujah', cursive;
 }
 
+
 section{
-    background-color:green;
     width:60%;
     display:inline-block;
+    margin-top:50px;
 }
 
+/***** CONTACTS *****/
 .contact-container{
-    border:solid orange 2px;
+    display:inline-block;
+    vertical-align:top;
+    background-color:#339966;
     width:200px;
+    border-radius:12%;
+    margin:5px;
+}
+.contact-logo{
+    display:inline-block;
+    padding-left:10px;
+    padding-top:10px;
+}
+.contact-logo img{
+    width:50px;
+    height:50px;
+}
+.edit-contact-button{
+    vertical-align:top;
+    float:right;
+    cursor:pointer;
+}
+.remove-contact-button{
+    vertical-align:top;
+    float:right;
+    cursor:pointer;
 }
 .contact-container .name{
-    background-color:red;
+    background-color:orange;
+    vertical-align: top;
+    padding:5px;
 }
+.phonenumber-list{
+    list-style-image: url('./telephone-icon.png');
+}
+.phonenumber-list li{
+    line-height:0.3;
+}
+.email-list{
+    list-style-image: url('./email-icon.png');
+}
+.email-list li{
+    line-height:0.1;
+}
+
 
 
 

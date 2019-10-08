@@ -23,15 +23,17 @@ heading.setAttribute('class','heading');
 heading.innerHTML="Dat´z kontaktëen liste";
 header.append(heading);
 
-// SECTION 
+// section
 let section = document.createElement('section');
 divContainer.append(section);
 
-//ASIDE
+// aside
 let aside = document.createElement('aside');
 divContainer.append(aside);
 
-//-------------- OBJECT CREATE-------------//
+
+
+// ******** OBJECT CREATE ******** //
 
 //--my array of contact objects--//
 let arrayOfContacts =[];
@@ -54,7 +56,7 @@ function createContact(id,name,phoneNumbers,personalContacts){
 	return newInstance;
 }
 
-/*
+
 
 let manne = new createContact('0','Sven Bertilsson',['0462118787','099999999'],['kent','malin','gurra']);
 arrayOfContacts.push(manne);
@@ -65,7 +67,7 @@ arrayOfContacts.push(robban);
 let bella = new createContact('2','bella beckström',['78654324'],['kajsa','kristina','åsa','jonas']);
 arrayOfContacts.push(bella );
 
-*/
+
 
 //-------- DISPLAY CONTACTS ARRAY IN THE DOM -------------//
 
@@ -79,16 +81,21 @@ function displayContacts(){
 		let contactContainer =  document.createElement('div');
 		contactContainer.setAttribute('class','contact-container');
 
+		let contactLogo= document.createElement('div');
+		contactLogo.innerHTML= "<img src='./person-logo.png'>";
+		contactLogo.setAttribute('class','contact-logo');
+		contactContainer.append(contactLogo);
+
 		let editContactButton = document.createElement('button');
 		editContactButton.setAttribute('class','edit-contact-button');
 		editContactButton.setAttribute('id',contactItem.id);
-		editContactButton.innerHTML= 'redigera';
+		editContactButton.innerHTML="R";
 		contactContainer.append(editContactButton);
 
 		let removeContactButton = document.createElement('button');
 		removeContactButton.setAttribute('class','remove-contact-button');
 		removeContactButton.setAttribute('id',contactItem.id);
-		removeContactButton.innerHTML= 'ta bort';
+		removeContactButton.innerHTML= 'X';
 		contactContainer.append(removeContactButton);
 		
 		// name
@@ -98,11 +105,8 @@ function displayContacts(){
 		contactContainer.append(contactInfoListName);
 	
 		//phone
-		let contactInfoListPhone = document.createElement('p');
-		contactInfoListPhone.innerHTML= 'Telefonnummer:';
-		contactContainer.append(contactInfoListPhone);
-	
 		let ul = document.createElement('ul');
+		ul.setAttribute('class','phonenumber-list');
 		contactContainer.append(ul);
 		for(phoneNumber of contactItem.phoneNumbers ){
 			let li = document.createElement('li');
@@ -110,12 +114,9 @@ function displayContacts(){
 			ul.append(li);
 		}
 	
-		//contacts
-		let contactInfoListPersonalContacts = document.createElement('p');
-		contactInfoListPersonalContacts.innerHTML= 'Kontakter:';
-		contactContainer.append(contactInfoListPersonalContacts);
-	
+		// email
 		let ul2 = document.createElement('ul');
+		ul2.setAttribute('class','email-list');
 		contactContainer.append(ul2);
 		for(personalContact of contactItem.personalContacts ){
 			let li = document.createElement('li');
