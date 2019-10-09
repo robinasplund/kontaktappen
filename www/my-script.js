@@ -39,7 +39,7 @@ divContainer.append(aside);
 //--my array of contact objects--//
 let arrayOfContacts =[];
 //-- contact id generator
-let idGenerator = 0;
+let idGenerator = 3;
 
 const contactPrototype ={
 	id:'',
@@ -59,13 +59,13 @@ function createContact(id,name,phoneNumbers,emails){
 
 
 
-let manne = new createContact('0','Sven Bertilsson',['0462118787','099999999'],['kent@mail.com']);
+let manne = new createContact(0,'Sven Bertilsson',['0462118787','099999999'],['kent@mail.com']);
 arrayOfContacts.push(manne);
 
-let robban = new createContact('1','robban aspland',['0799019897'],['rob@hotmail.com','rob2@hotmail.com']);
+let robban = new createContact(1,'robban aspland',['0799019897'],['rob@hotmail.com','rob2@hotmail.com']);
 arrayOfContacts.push(robban);
 
-let bella = new createContact('2','bella beckström',['78654324'],['bella@yahoo.com','bella2@hotmail.com']);
+let bella = new createContact(2,'bella beckström',['78654324'],['bella@yahoo.com','bella2@hotmail.com']);
 arrayOfContacts.push(bella );
 
 
@@ -210,13 +210,16 @@ window.addEventListener('click', e =>{
 	window.addEventListener('click', e => {
 		if(e.target.closest('.edit-contact-button')){
 
-
+			console.log('RUNNING OUTER !!!!!');
 			editContactContainer.innerHTML='';
 
 			let contactToEdit =arrayOfContacts.filter(function(object){
 				return object.id == e.target.id;
 			});
+			
+			//console.log('contact to edit '+contactToEdit[0].name);
 
+			
 			let contactToEditName;
 			let contactToEditPhone;
 			let contactToEditEmail;
@@ -247,32 +250,35 @@ window.addEventListener('click', e =>{
 			button2.innerHTML='spara';
 			editContactContainer.append(button2);
 
-
+			
 			window.addEventListener('click', e => {
 				if(e.target.closest('.edit-contact-submit-button')){
+
+					console.log('RUNNING INNER !!!!!');
 		
 					let editedContactName = document.querySelector('.edit-contact-input-name').value;
 					let editedContactPhone = document.querySelector('.edit-contact-input-phone').value;
 					let editedContactEmail = document.querySelector('.edit-contact-input-email').value;
 
 					let editedContact = new createContact(contactToEdit[0].id,editedContactName,[editedContactPhone],[editedContactEmail]);
-				
-					let indexOfObject=arrayOfContacts.findIndex(x => x.id === contactToEdit[0].id);
 
-					arrayOfContacts.splice(indexOfObject,1,editedContact);
-					//console.log(arrayOfContacts);
-			
+					/*for(let key in editedContact){
+						let val = editedContact[key];
+						console.log('the edited contact '+key, val);
+					}*/
 					
-					displayContacts();
+					//console.log(editedContact.id+'edited contact id');
+					
+					let indexOfObject=arrayOfContacts.findIndex(x => x.id === editedContact.id);
 
+					//console.log('index of the edited contact in array'+ indexOfObject)
+
+					arrayOfContacts.splice(indexOfObject,1,editedContact); 
+						
+					displayContacts();
 				}
 			});
-
-
-
-
-
-
+			
 
 		}
 	});
