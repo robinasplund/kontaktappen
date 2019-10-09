@@ -207,13 +207,15 @@ window.addEventListener('click', e =>{
 	editContactContainer.setAttribute('class','edit-contact-container');
 	aside.append(editContactContainer);
 
+
+	let contactToEdit;
 	window.addEventListener('click', e => {
 		if(e.target.closest('.edit-contact-button')){
 
 			console.log('RUNNING OUTER !!!!!');
 			editContactContainer.innerHTML='';
 
-			let contactToEdit =arrayOfContacts.filter(function(object){
+			contactToEdit =arrayOfContacts.filter(function(object){
 				return object.id == e.target.id;
 			});
 			
@@ -249,42 +251,38 @@ window.addEventListener('click', e =>{
 			button2.setAttribute('class','edit-contact-submit-button');
 			button2.innerHTML='spara';
 			editContactContainer.append(button2);
-
-			
-			window.addEventListener('click', e => {
-				if(e.target.closest('.edit-contact-submit-button')){
-
-					console.log('RUNNING INNER !!!!!');
-		
-					let editedContactName = document.querySelector('.edit-contact-input-name').value;
-					let editedContactPhone = document.querySelector('.edit-contact-input-phone').value;
-					let editedContactEmail = document.querySelector('.edit-contact-input-email').value;
-
-					let editedContact = new createContact(contactToEdit[0].id,editedContactName,[editedContactPhone],[editedContactEmail]);
-
-					/*for(let key in editedContact){
-						let val = editedContact[key];
-						console.log('the edited contact '+key, val);
-					}*/
-					
-					//console.log(editedContact.id+'edited contact id');
-					
-					let indexOfObject=arrayOfContacts.findIndex(x => x.id === editedContact.id);
-
-					//console.log('index of the edited contact in array'+ indexOfObject)
-
-					arrayOfContacts.splice(indexOfObject,1,editedContact); 
 						
-					displayContacts();
-				}
-			});
-			
-
 		}
 	});
 
 	
+	window.addEventListener('click', e => {
+		if(e.target.closest('.edit-contact-submit-button')){
 
+			console.log('RUNNING INNER !!!!!');
+
+			let editedContactName = document.querySelector('.edit-contact-input-name').value;
+			let editedContactPhone = document.querySelector('.edit-contact-input-phone').value;
+			let editedContactEmail = document.querySelector('.edit-contact-input-email').value;
+
+			let editedContact = new createContact(contactToEdit[0].id,editedContactName,[editedContactPhone],[editedContactEmail]);
+
+			/*for(let key in editedContact){
+				let val = editedContact[key];
+				console.log('the edited contact '+key, val);
+			}*/
+			
+			//console.log(editedContact.id+'edited contact id');
+			
+			let indexOfObject=arrayOfContacts.findIndex(x => x.id === editedContact.id);
+
+			//console.log('index of the edited contact in array'+ indexOfObject)
+
+			arrayOfContacts.splice(indexOfObject,1,editedContact); 
+				
+			displayContacts();
+		}
+	});
 
 
 
