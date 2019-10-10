@@ -260,28 +260,57 @@ window.addEventListener('click', e =>{
 
 			
 			let contactToEditName;
-			let contactToEditPhone;
-			let contactToEditEmail;
+			let contactToEditPhone1;
+			let contactToEditPhone2;
+			let contactToEditPhone3;
+			let contactToEditEmail1;
+			let contactToEditEmail2;
+			let contactToEditEmail3;
 			for(let key of contactToEdit){
 				contactToEditName= key.name;
-				contactToEditPhone= key.phoneNumbers;
-				contactToEditEmail= key.emails;
+				contactToEditPhone1= key.phoneNumbers[0];
+				contactToEditPhone2= key.phoneNumbers[1];
+				contactToEditPhone3= key.phoneNumbers[2];
+				contactToEditEmail1= key.emails[0];
+				contactToEditEmail2= key.emails[1];
+				contactToEditEmail3= key.emails[2];
 			}
 
 			let input8=document.createElement('input');
 			input8.setAttribute('class','edit-contact-input-name');
 			input8.setAttribute('placeholder',contactToEditName);
 			editContactContainer.append(input8);
-
+			//phones
 			let input9=document.createElement('input');
-			input9.setAttribute('class','edit-contact-input-phone');
-			input9.setAttribute('placeholder',contactToEditPhone);
+			input9.setAttribute('class','edit-contact-input-phone edit-contact-input-phone1');
+			input9.setAttribute('placeholder',contactToEditPhone1);
 			editContactContainer.append(input9);
 
 			let input10=document.createElement('input');
-			input10.setAttribute('class','edit-contact-input-email');
-			input10.setAttribute('placeholder',contactToEditEmail);
+			input10.setAttribute('class','edit-contact-input-phone edit-contact-input-phone2');
+			input10.setAttribute('placeholder',contactToEditPhone2);
 			editContactContainer.append(input10);
+
+			let input11=document.createElement('input');
+			input11.setAttribute('class','edit-contact-input-phone edit-contact-input-phone3');
+			input11.setAttribute('placeholder',contactToEditPhone3);
+			editContactContainer.append(input11);
+
+			//emails
+			let input12=document.createElement('input');
+			input12.setAttribute('class','edit-contact-input-email edit-contact-input-email1');
+			input12.setAttribute('placeholder',contactToEditEmail1);
+			editContactContainer.append(input12);
+
+			let input13=document.createElement('input');
+			input13.setAttribute('class','edit-contact-input-email edit-contact-input-email2');
+			input13.setAttribute('placeholder',contactToEditEmail2);
+			editContactContainer.append(input13);
+
+			let input14=document.createElement('input');
+			input14.setAttribute('class','edit-contact-input-email edit-contact-input-email3');
+			input14.setAttribute('placeholder',contactToEditEmail3);
+			editContactContainer.append(input14);
 
 			let button2 = document.createElement('button');
 			button2.setAttribute('type','button');
@@ -299,10 +328,22 @@ window.addEventListener('click', e =>{
 			console.log('RUNNING INNER !!!!!');
 
 			let editedContactName = document.querySelector('.edit-contact-input-name').value;
-			let editedContactPhone = document.querySelector('.edit-contact-input-phone').value;
-			let editedContactEmail = document.querySelector('.edit-contact-input-email').value;
 
-			let editedContact = new createContact(contactToEdit[0].id,editedContactName,[editedContactPhone],[editedContactEmail]);
+			let editedContactPhone1 = document.querySelector('.edit-contact-input-phone1').value;
+			let editedContactPhone2 = document.querySelector('.edit-contact-input-phone2').value;
+			let editedContactPhone3 = document.querySelector('.edit-contact-input-phone3').value;
+
+			let arrayOfEditedPhonenumbers=[editedContactPhone1,editedContactPhone2,editedContactPhone3];
+			let arrayOfEditedPhonenumbers2 = arrayOfEditedPhonenumbers.filter(function(v){return v!==''});
+
+			let editedContactEmail1 = document.querySelector('.edit-contact-input-email1').value;
+			let editedContactEmail2 = document.querySelector('.edit-contact-input-email2').value;
+			let editedContactEmail3 = document.querySelector('.edit-contact-input-email3').value;
+
+			let arrayOfEditedEmails=[editedContactEmail1,editedContactEmail2,editedContactEmail3];
+			let arrayOfEditedEmails2 = arrayOfEditedEmails.filter(function(v){return v!==''});
+
+			let editedContact = new createContact(contactToEdit[0].id,editedContactName,arrayOfEditedPhonenumbers2,arrayOfEditedEmails2);
 
 			/*for(let key in editedContact){
 				let val = editedContact[key];
