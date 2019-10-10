@@ -168,14 +168,39 @@ addContactContainer.append(input);
 let input2 = document.createElement('input');
 input2.setAttribute('type','text');
 input2.setAttribute('placeholder','telefonnummer');
-input2.setAttribute('class','add-contact-input-phone');
+input2.setAttribute('class','add-contact-input-phone add-contact-input-phone1');
 addContactContainer.append(input2);
-// email
+
 let input3 = document.createElement('input');
 input3.setAttribute('type','text');
-input3.setAttribute('placeholder','emailadress');
-input3.setAttribute('class','add-contact-input-email');
+input3.setAttribute('placeholder','telefonnummer');
+input3.setAttribute('class','add-contact-input-phone add-contact-input-phone2');
 addContactContainer.append(input3);
+
+let input4 = document.createElement('input');
+input4.setAttribute('type','text');
+input4.setAttribute('placeholder','telefonnummer');
+input4.setAttribute('class','add-contact-input-phone add-contact-input-phone3');
+addContactContainer.append(input4);
+
+// email
+let input5 = document.createElement('input');
+input5.setAttribute('type','text');
+input5.setAttribute('placeholder','emailadress');
+input5.setAttribute('class','add-contact-input-email add-contact-input-email1');
+addContactContainer.append(input5);
+
+let input6 = document.createElement('input');
+input6.setAttribute('type','text');
+input6.setAttribute('placeholder','emailadress');
+input6.setAttribute('class','add-contact-input-email add-contact-input-email2');
+addContactContainer.append(input6);
+
+let input7 = document.createElement('input');
+input7.setAttribute('type','text');
+input7.setAttribute('placeholder','emailadress');
+input7.setAttribute('class','add-contact-input-email add-contact-input-email3');
+addContactContainer.append(input7);
 
 // submit button
 let button = document.createElement('button');
@@ -190,10 +215,22 @@ window.addEventListener('click', e =>{
 
 		let addContactId = idGenerator; 
 		let addContactName = document.querySelector('.add-contact-input-name').value;
-		let addContactPhone = document.querySelector('.add-contact-input-phone').value;
-		let addContactEmail = document.querySelector('.add-contact-input-email').value;
 	
-		let newContact = new createContact(addContactId,addContactName,[addContactPhone],[addContactEmail]);
+		let addContactPhone1 = document.querySelector('.add-contact-input-phone1').value;		
+		let addContactPhone2 = document.querySelector('.add-contact-input-phone2').value;
+		let addContactPhone3 = document.querySelector('.add-contact-input-phone3').value;
+
+		let arrayOfPhonenumbers=[addContactPhone1,addContactPhone2,addContactPhone3];
+		let arrayOfPhonenumbers2 = arrayOfPhonenumbers.filter(function(v){return v!==''});
+
+		let addContactEmail1 = document.querySelector('.add-contact-input-email1').value;
+		let addContactEmail2 = document.querySelector('.add-contact-input-email2').value;
+		let addContactEmail3 = document.querySelector('.add-contact-input-email3').value;
+
+		let arrayOfEmails=[addContactEmail1,addContactEmail2,addContactEmail3];
+		let arrayOfEmails2 = arrayOfEmails.filter(function(v){return v!==''});
+	
+		let newContact = new createContact(addContactId,addContactName,arrayOfPhonenumbers2,arrayOfEmails2);
 		arrayOfContacts.push(newContact); 
 		idGenerator++;
 		displayContacts();
@@ -231,20 +268,20 @@ window.addEventListener('click', e =>{
 				contactToEditEmail= key.emails;
 			}
 
-			let input4=document.createElement('input');
-			input4.setAttribute('class','edit-contact-input-name');
-			input4.setAttribute('placeholder',contactToEditName);
-			editContactContainer.append(input4);
+			let input8=document.createElement('input');
+			input8.setAttribute('class','edit-contact-input-name');
+			input8.setAttribute('placeholder',contactToEditName);
+			editContactContainer.append(input8);
 
-			let input5=document.createElement('input');
-			input5.setAttribute('class','edit-contact-input-phone');
-			input5.setAttribute('placeholder',contactToEditPhone);
-			editContactContainer.append(input5);
+			let input9=document.createElement('input');
+			input9.setAttribute('class','edit-contact-input-phone');
+			input9.setAttribute('placeholder',contactToEditPhone);
+			editContactContainer.append(input9);
 
-			let input6=document.createElement('input');
-			input6.setAttribute('class','edit-contact-input-email');
-			input6.setAttribute('placeholder',contactToEditEmail);
-			editContactContainer.append(input6);
+			let input10=document.createElement('input');
+			input10.setAttribute('class','edit-contact-input-email');
+			input10.setAttribute('placeholder',contactToEditEmail);
+			editContactContainer.append(input10);
 
 			let button2 = document.createElement('button');
 			button2.setAttribute('type','button');
