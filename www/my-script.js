@@ -288,7 +288,7 @@ window.addEventListener('click', e =>{
 				input9.setAttribute('value',contactToEditPhone1);
 			  }
 			else{
-				input9.setAttribute('placeholder',contactToEditPhone1);
+				input9.setAttribute('placeholder','telefonnummer');
 			}
 			editContactContainer.append(input9);
 
@@ -298,7 +298,7 @@ window.addEventListener('click', e =>{
 				input10.setAttribute('value',contactToEditPhone2);
 			  }
 			else{
-				input10.setAttribute('placeholder',contactToEditPhone2);
+				input10.setAttribute('placeholder','telefonnummer');
 			}
 			editContactContainer.append(input10);
 
@@ -308,7 +308,7 @@ window.addEventListener('click', e =>{
 				input11.setAttribute('value',contactToEditPhone3);
 			  }
 			else{
-				input11.setAttribute('placeholder',contactToEditPhone3);
+				input11.setAttribute('placeholder','telefonnummer');
 			}
 			editContactContainer.append(input11);
 
@@ -319,7 +319,7 @@ window.addEventListener('click', e =>{
 				input12.setAttribute('value',contactToEditEmail1);
 			  }
 			else{
-				input12.setAttribute('placeholder',contactToEditEmail1);
+				input12.setAttribute('placeholder','emailadress');
 			}
 			editContactContainer.append(input12);
 
@@ -329,7 +329,7 @@ window.addEventListener('click', e =>{
 				input13.setAttribute('value',contactToEditEmail2);
 			  }
 			else{
-				input13.setAttribute('placeholder',contactToEditEmail2);
+				input13.setAttribute('placeholder','emailadress');
 			}
 			editContactContainer.append(input13);
 
@@ -339,7 +339,7 @@ window.addEventListener('click', e =>{
 				input14.setAttribute('value',contactToEditEmail3);
 			  }
 			else{
-				input14.setAttribute('placeholder',contactToEditEmail3);
+				input14.setAttribute('placeholder','emailadress');
 			}
 			editContactContainer.append(input14);
 
