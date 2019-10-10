@@ -299,27 +299,45 @@ window.addEventListener('click', e =>{
 
 /*LOCAL STORAGE*/
 
+
+//localStorage.clear();
 /*
-let car;
-try {
- car = JSON.parse(localStorage.car);
-}
-catch(e){
- car = {};
-}
- 
-car.save = function(){
-  localStorage.car = JSON.stringify(this);
-};
-*/
-/*if*//*
-  console.log('Creating car');
-  car.model = {model: 'audi'};
-  car.save();
+localStorage.setItem(
+	'name','bosse'
 
-console.log(window.localStorage)
+);*/
+//localStorage.removeItem('name');
+//let x= localStorage.getItem('name');
+//console.log(localStorage.key(0))
+
+/*
+let a='name';
+let b = 'robban'
+localStorage.setItem(a,b);
+console.log(localStorage);
 */
 
+let myObj = {
+	name: "robert",
+	age: 35
+}
+/*
+localStorage.setItem("myObj",myObj);
+console.log(localStorage);
+
+let x= localStorage.getItem("myObj");
+console.log(x);
+let y= localStorage.getItem("myObj").name;
+console.log(y); */
+
+let myObj2 = JSON.stringify(myObj);
+//console.log(myObj2);
+localStorage.setItem('myObj2',myObj2);
+//console.log(localStorage);
+
+let myObj3 = JSON.parse(localStorage.getItem("myObj2"));
+
+console.log(myObj3.name);
 
 
 
