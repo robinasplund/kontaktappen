@@ -278,38 +278,69 @@ window.addEventListener('click', e =>{
 
 			let input8=document.createElement('input');
 			input8.setAttribute('class','edit-contact-input-name');
-			input8.setAttribute('placeholder',contactToEditName);
+			input8.setAttribute('value',contactToEditName);
 			editContactContainer.append(input8);
+
 			//phones
 			let input9=document.createElement('input');
 			input9.setAttribute('class','edit-contact-input-phone edit-contact-input-phone1');
-			input9.setAttribute('placeholder',contactToEditPhone1);
+			if (contactToEditPhone1) {      
+				input9.setAttribute('value',contactToEditPhone1);
+			  }
+			else{
+				input9.setAttribute('placeholder',contactToEditPhone1);
+			}
 			editContactContainer.append(input9);
 
 			let input10=document.createElement('input');
 			input10.setAttribute('class','edit-contact-input-phone edit-contact-input-phone2');
-			input10.setAttribute('placeholder',contactToEditPhone2);
+			if (contactToEditPhone2) {      
+				input10.setAttribute('value',contactToEditPhone2);
+			  }
+			else{
+				input10.setAttribute('placeholder',contactToEditPhone2);
+			}
 			editContactContainer.append(input10);
 
 			let input11=document.createElement('input');
 			input11.setAttribute('class','edit-contact-input-phone edit-contact-input-phone3');
-			input11.setAttribute('placeholder',contactToEditPhone3);
+			if (contactToEditPhone3) {      
+				input11.setAttribute('value',contactToEditPhone3);
+			  }
+			else{
+				input11.setAttribute('placeholder',contactToEditPhone3);
+			}
 			editContactContainer.append(input11);
 
 			//emails
 			let input12=document.createElement('input');
 			input12.setAttribute('class','edit-contact-input-email edit-contact-input-email1');
-			input12.setAttribute('placeholder',contactToEditEmail1);
+			if (contactToEditEmail1) {      
+				input12.setAttribute('value',contactToEditEmail1);
+			  }
+			else{
+				input12.setAttribute('placeholder',contactToEditEmail1);
+			}
 			editContactContainer.append(input12);
 
 			let input13=document.createElement('input');
 			input13.setAttribute('class','edit-contact-input-email edit-contact-input-email2');
-			input13.setAttribute('placeholder',contactToEditEmail2);
+			if (contactToEditEmail2) {      
+				input13.setAttribute('value',contactToEditEmail2);
+			  }
+			else{
+				input13.setAttribute('placeholder',contactToEditEmail2);
+			}
 			editContactContainer.append(input13);
 
 			let input14=document.createElement('input');
 			input14.setAttribute('class','edit-contact-input-email edit-contact-input-email3');
-			input14.setAttribute('placeholder',contactToEditEmail3);
+			if (contactToEditEmail3) {      
+				input14.setAttribute('value',contactToEditEmail3);
+			  }
+			else{
+				input14.setAttribute('placeholder',contactToEditEmail3);
+			}
 			editContactContainer.append(input14);
 
 			let button2 = document.createElement('button');
