@@ -45,27 +45,29 @@ const contactPrototype ={
 	id:'',
 	name:'',
 	phoneNumbers:[],
-	emails:[]
+	emails:[],
+	editVersion:''
 }
 
-function createContact(id,name,phoneNumbers,emails){
+function createContact(id,name,phoneNumbers,emails,editVersion){
 	let newInstance = Object.create(contactPrototype);
 	newInstance.id=id;
 	newInstance.name=name;
 	newInstance.phoneNumbers=phoneNumbers;
 	newInstance.emails=emails;
+	newInstance.editVersion=editVersion;
 	return newInstance;
 }
 
 
 
-let manne = new createContact(0,'Sven Bertilsson',['0462118787','099999999'],['kent@mail.com']);
+let manne = new createContact(0,'Sven Bertilsson',['0462118787','099999999'],['kent@mail.com'],'0');
 arrayOfContacts.push(manne);
 
-let robban = new createContact(1,'robban aspland',['0799019897'],['rob@hotmail.com','rob2@hotmail.com']);
+let robban = new createContact(1,'robban aspland',['0799019897'],['rob@hotmail.com','rob2@hotmail.com'],'0');
 arrayOfContacts.push(robban);
 
-let bella = new createContact(2,'bella beckström',['78654324'],['bella@yahoo.com','bella2@hotmail.com']);
+let bella = new createContact(2,'bella beckström',['78654324'],['bella@yahoo.com','bella2@hotmail.com'],'0');
 arrayOfContacts.push(bella );
 
 
@@ -81,11 +83,6 @@ function displayContacts(){
 	for (contactItem of arrayOfContacts){
 
 		//console.log(contactItem);
-		//localStorage.clear();
-		
-		console.log(localStorage);
-		//console.log(localStorage.key(1).length);
-
 	
 		let contactContainer =  document.createElement('div');
 		contactContainer.setAttribute('class','contact-container');
@@ -236,7 +233,7 @@ window.addEventListener('click', e =>{
 		let arrayOfEmails=[addContactEmail1,addContactEmail2,addContactEmail3];
 		let arrayOfEmails2 = arrayOfEmails.filter(function(v){return v!==''});
 	
-		let newContact = new createContact(addContactId,addContactName,arrayOfPhonenumbers2,arrayOfEmails2);
+		let newContact = new createContact(addContactId,addContactName,arrayOfPhonenumbers2,arrayOfEmails2,'0');
 		arrayOfContacts.push(newContact); 
 		idGenerator++;
 		displayContacts();
@@ -261,6 +258,8 @@ window.addEventListener('click', e =>{
 			contactToEdit =arrayOfContacts.filter(function(object){
 				return object.id == e.target.id;
 			});
+
+			//alert(contactToEdit.name);
 				
 			let contactToEditName;
 			let contactToEditPhone1;
@@ -360,8 +359,7 @@ window.addEventListener('click', e =>{
 			editContactContainer.append(historyContainer);
 
 			//get data from localstorage
-			let showEditedContact = JSON.parse(localStorage.getItem(e.target.id));
-			
+			let showEditedContact = JSON.parse(localStorage.getItem(e.target.id+'.0'));
 		
 			//display data
 			for(let key in showEditedContact){
@@ -371,8 +369,27 @@ window.addEventListener('click', e =>{
 				historyContainer.append(container);
 			}	
 
+			//Going back in history
+			let EditHistoryBackButton = document.createElement('button');
+			EditHistoryBackButton.setAttribute('class','edit-contact-history-back-button');
+			EditHistoryBackButton.innerHTML='bak';
+			historyContainer.append(EditHistoryBackButton);
+
 		}
 	});
+
+			
+
+		
+			
+			window.addEventListener('click', e =>{
+				if(e.target.closest('.edit-contact-history-back-button')){
+					
+					console.log(contactToEdit[0].id);
+					let showEditedContact2 = JSON.parse(localStorage.getItem(contactToEdit[0].id+'.1'));
+					console.log(showEditedContact2);
+				}
+			});
 
 	
 	window.addEventListener('click', e => {
@@ -394,31 +411,25 @@ window.addEventListener('click', e =>{
 			let arrayOfEditedEmails=[editedContactEmail1,editedContactEmail2,editedContactEmail3];
 			let arrayOfEditedEmails2 = arrayOfEditedEmails.filter(function(v){return v!==''});
 
-			let editedContact = new createContact(contactToEdit[0].id,editedContactName,arrayOfEditedPhonenumbers2,arrayOfEditedEmails2);			
+			let editedContact = new createContact(contactToEdit[0].id,editedContactName,arrayOfEditedPhonenumbers2,arrayOfEditedEmails2,contactToEdit[0].editVersion);			
 			let indexOfObject=arrayOfContacts.findIndex(x => x.id === editedContact.id);
 			arrayOfContacts.splice(indexOfObject,1,editedContact); 
 
-			
-			console.log(editedContact);
-			//editedContact.date = new Date();
-			//console.log('date'+editedContact.date);
-			editedContact.version=1;
-			
-			if(editedContact.version){
-				alert('hej');
-				editedContact.version++;
-			}
-		
-			console.log(editedContact);
+			contactToEdit[0].editVersion++;
+
+			let editVersionString = editedContact.id+'.'+editedContact.editVersion;
 
 			//****************HISTORY STUFF***********/		
-			//let arrayOfEdits =[];
-			//arrayOfEdits.push(JSON.stringify(editedContact));
+			let editedContact2 = JSON.stringify(editedContact);			
+			//localStorage.setItem(editedContact.id,editedContact2);
+			localStorage.setItem(editVersionString,editedContact2);
 
-			let editedContact2 = JSON.stringify(editedContact);
+
+			//localStorage.clear();
+		
+			console.log(localStorage);
+
 			
-			localStorage.setItem(editedContact.id,editedContact2);
-			//localStorage.setItem(editedContact.id,arrayOfEdits);
 			//************************************** */
 				
 			displayContacts();
