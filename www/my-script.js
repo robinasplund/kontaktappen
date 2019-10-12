@@ -255,8 +255,8 @@ window.addEventListener('click', e =>{
 			contactToEdit =arrayOfContacts.filter(function(object){
 				return object.id == e.target.id;
 			});
-			
-			//console.log('contact to edit '+contactToEdit[0].name);
+		
+			//console.log('contact to edit !!!! '+contactToEdit[0].id);
 
 			
 			let contactToEditName;
@@ -348,7 +348,37 @@ window.addEventListener('click', e =>{
 			button2.setAttribute('class','edit-contact-submit-button');
 			button2.innerHTML='spara';
 			editContactContainer.append(button2);
-						
+
+
+			//*******history stuff****** */
+			//heading and container
+			
+			/*let editHistoryHeading = document.createElement('h2');
+			editHistoryHeading.innerHTML='Editerings historik'			
+			historyContainer.append(editHistoryHeading);*/
+
+			console.log('tha storage '+localStorage);
+
+			let historyContainer=document.createElement('div');
+			historyContainer.setAttribute('class','edit-contact-history-container');
+			editContactContainer.append(historyContainer);
+
+			//get data from localstorage
+			let showEditedContact = JSON.parse(localStorage.getItem(e.target.id));
+
+			//display data
+			for(let key in showEditedContact){
+				let val = showEditedContact[key];
+				//console.log(key, val);
+				let container= document.createElement('p');
+				container.innerHTML=key+' '+val;
+				historyContainer.append(container);
+			}
+
+			
+	//contactToEdit[0].id
+	
+			
 		}
 	});
 
@@ -388,6 +418,17 @@ window.addEventListener('click', e =>{
 			//console.log('index of the edited contact in array'+ indexOfObject)
 
 			arrayOfContacts.splice(indexOfObject,1,editedContact); 
+
+
+			//****************HISTORY STUFF***********/
+			/*let myObj = {
+				name: "robert",
+				age: 35
+			}*/
+			let editedContact2 = JSON.stringify(editedContact);
+			localStorage.setItem(editedContact.id,editedContact2);
+			//let myObj3 = JSON.parse(localStorage.getItem("myObj2"));			
+			//console.log(myObj3.name);
 				
 			displayContacts();
 		}
@@ -425,11 +466,11 @@ let b = 'robban'
 localStorage.setItem(a,b);
 console.log(localStorage);
 */
-
+/*
 let myObj = {
 	name: "robert",
 	age: 35
-}
+} */
 /*
 localStorage.setItem("myObj",myObj);
 console.log(localStorage);
@@ -439,16 +480,19 @@ console.log(x);
 let y= localStorage.getItem("myObj").name;
 console.log(y); */
 
-let myObj2 = JSON.stringify(myObj);
+
+
+
+//let myObj2 = JSON.stringify(myObj);
 //console.log(myObj2);
-localStorage.setItem('myObj2',myObj2);
+//localStorage.setItem('myObj2',myObj2);
 //console.log(localStorage);
 
-let myObj3 = JSON.parse(localStorage.getItem("myObj2"));
+//let myObj3 = JSON.parse(localStorage.getItem("myObj2"));
 
-console.log(myObj3.name);
+//console.log(myObj3.name);
 
 
 
- 
+
 
