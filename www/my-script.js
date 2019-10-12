@@ -81,6 +81,11 @@ function displayContacts(){
 	for (contactItem of arrayOfContacts){
 
 		//console.log(contactItem);
+		//localStorage.clear();
+		
+		console.log(localStorage);
+		//console.log(localStorage.key(1).length);
+
 	
 		let contactContainer =  document.createElement('div');
 		contactContainer.setAttribute('class','contact-container');
@@ -356,7 +361,8 @@ window.addEventListener('click', e =>{
 
 			//get data from localstorage
 			let showEditedContact = JSON.parse(localStorage.getItem(e.target.id));
-
+			
+		
 			//display data
 			for(let key in showEditedContact){
 				let val = showEditedContact[key];
@@ -392,9 +398,27 @@ window.addEventListener('click', e =>{
 			let indexOfObject=arrayOfContacts.findIndex(x => x.id === editedContact.id);
 			arrayOfContacts.splice(indexOfObject,1,editedContact); 
 
+			
+			console.log(editedContact);
+			//editedContact.date = new Date();
+			//console.log('date'+editedContact.date);
+			editedContact.version=1;
+			
+			if(editedContact.version){
+				alert('hej');
+				editedContact.version++;
+			}
+		
+			console.log(editedContact);
+
 			//****************HISTORY STUFF***********/		
+			//let arrayOfEdits =[];
+			//arrayOfEdits.push(JSON.stringify(editedContact));
+
 			let editedContact2 = JSON.stringify(editedContact);
+			
 			localStorage.setItem(editedContact.id,editedContact2);
+			//localStorage.setItem(editedContact.id,arrayOfEdits);
 			//************************************** */
 				
 			displayContacts();
