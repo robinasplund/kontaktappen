@@ -80,8 +80,7 @@ function displayContacts(){
 	section.innerHTML ='';
 	for (contactItem of arrayOfContacts){
 
-		console.log(contactItem);
-		//console.log('id-gen'+idGenerator);
+		//console.log(contactItem);
 	
 		let contactContainer =  document.createElement('div');
 		contactContainer.setAttribute('class','contact-container');
@@ -135,9 +134,10 @@ function displayContacts(){
 }
 displayContacts();
 
+
+
+
 //-------------- REMOVE CONTACTS FROM THE DOM --------------//
-
-
 
 window.addEventListener('click', e => {
 	if(e.target.closest('.remove-contact-button')){
@@ -146,11 +146,12 @@ window.addEventListener('click', e => {
 			return item.id != e.target.id;
 		});
 
-		//console.log(arrayOfContacts);
-
 		displayContacts();
 	}
 });
+
+
+
 
 //------------ Add Contact ---------------//
 
@@ -238,27 +239,24 @@ window.addEventListener('click', e =>{
 });
 
 
+
+
 //---------------- EDIT CONTACTS ---------------//
 
 	let editContactContainer = document.createElement('div');
 	editContactContainer.setAttribute('class','edit-contact-container');
 	aside.append(editContactContainer);
 
-
 	let contactToEdit;
 	window.addEventListener('click', e => {
 		if(e.target.closest('.edit-contact-button')){
 
-			console.log('RUNNING OUTER !!!!!');
 			editContactContainer.innerHTML='';
 
 			contactToEdit =arrayOfContacts.filter(function(object){
 				return object.id == e.target.id;
 			});
-		
-			//console.log('contact to edit !!!! '+contactToEdit[0].id);
-
-			
+				
 			let contactToEditName;
 			let contactToEditPhone1;
 			let contactToEditPhone2;
@@ -351,13 +349,6 @@ window.addEventListener('click', e =>{
 
 
 			//*******history stuff****** */
-			//heading and container
-			
-			/*let editHistoryHeading = document.createElement('h2');
-			editHistoryHeading.innerHTML='Editerings historik'			
-			historyContainer.append(editHistoryHeading);*/
-
-			console.log('tha storage '+localStorage);
 
 			let historyContainer=document.createElement('div');
 			historyContainer.setAttribute('class','edit-contact-history-container');
@@ -369,24 +360,17 @@ window.addEventListener('click', e =>{
 			//display data
 			for(let key in showEditedContact){
 				let val = showEditedContact[key];
-				//console.log(key, val);
 				let container= document.createElement('p');
 				container.innerHTML=key+' '+val;
 				historyContainer.append(container);
-			}
+			}	
 
-			
-	//contactToEdit[0].id
-	
-			
 		}
 	});
 
 	
 	window.addEventListener('click', e => {
 		if(e.target.closest('.edit-contact-submit-button')){
-
-			console.log('RUNNING INNER !!!!!');
 
 			let editedContactName = document.querySelector('.edit-contact-input-name').value;
 
@@ -404,35 +388,37 @@ window.addEventListener('click', e =>{
 			let arrayOfEditedEmails=[editedContactEmail1,editedContactEmail2,editedContactEmail3];
 			let arrayOfEditedEmails2 = arrayOfEditedEmails.filter(function(v){return v!==''});
 
-			let editedContact = new createContact(contactToEdit[0].id,editedContactName,arrayOfEditedPhonenumbers2,arrayOfEditedEmails2);
-
-			/*for(let key in editedContact){
-				let val = editedContact[key];
-				console.log('the edited contact '+key, val);
-			}*/
-			
-			//console.log(editedContact.id+'edited contact id');
-			
+			let editedContact = new createContact(contactToEdit[0].id,editedContactName,arrayOfEditedPhonenumbers2,arrayOfEditedEmails2);			
 			let indexOfObject=arrayOfContacts.findIndex(x => x.id === editedContact.id);
-
-			//console.log('index of the edited contact in array'+ indexOfObject)
-
 			arrayOfContacts.splice(indexOfObject,1,editedContact); 
 
-
-			//****************HISTORY STUFF***********/
-			/*let myObj = {
-				name: "robert",
-				age: 35
-			}*/
+			//****************HISTORY STUFF***********/		
 			let editedContact2 = JSON.stringify(editedContact);
 			localStorage.setItem(editedContact.id,editedContact2);
-			//let myObj3 = JSON.parse(localStorage.getItem("myObj2"));			
-			//console.log(myObj3.name);
+			//************************************** */
 				
 			displayContacts();
 		}
 	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
