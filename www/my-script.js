@@ -70,10 +70,10 @@ function createContact(id,name,phoneNumbers,emails,editVersion){
 let manne = new createContact(0,'Sven Bertilsson',['0462118787','099999999'],['kent@mail.com'],'0');
 arrayOfContacts.push(manne);
 
-let robban = new createContact(1,'robban aspland',['0799019897'],['rob@hotmail.com','rob2@hotmail.com'],'0');
+let robban = new createContact(1,'Robban aspland',['0799019897'],['rob@hotmail.com','rob2@hotmail.com'],'0');
 arrayOfContacts.push(robban);
 
-let bella = new createContact(2,'bella beckström',['78654324'],['bella@yahoo.com','bella2@hotmail.com'],'0');
+let bella = new createContact(2,'Bella beckström',['78654324'],['bella@yahoo.com','bella2@hotmail.com'],'0');
 arrayOfContacts.push(bella );
 
 let olle = new createContact(
@@ -86,7 +86,17 @@ let olle = new createContact(
 arrayOfContacts.push(olle);
 
 
-
+function sortArrayOfContacts( a, b ) {
+	if ( a.name < b.name ){
+	  return -1;
+	}
+	if ( a.name > b.name ){
+	  return 1;
+	}
+	return 0;
+  }
+  
+ 
 
 
 
@@ -95,6 +105,7 @@ arrayOfContacts.push(olle);
 
 function displayContacts(){
 	section.innerHTML ='';
+	arrayOfContacts.sort( sortArrayOfContacts );
 	for (contactItem of arrayOfContacts){
 
 		//console.log(contactItem);
@@ -463,7 +474,6 @@ window.addEventListener('click', e =>{
 			displayContacts();
 		}
 	});
-
 
 
 
