@@ -33,7 +33,7 @@ aside.setAttribute('id','aside-container');
 divContainer.append(aside);
 
 
-
+//localStorage.clear();
 // ******** OBJECT CREATE ******** //
 
 //--my array of contact objects--//
@@ -354,7 +354,7 @@ window.addEventListener('click', e =>{
 
 			//*******history stuff****** */
 
-			let historyContainer=document.createElement('div');
+			this.historyContainer=document.createElement('div');
 			historyContainer.setAttribute('class','edit-contact-history-container');
 			editContactContainer.append(historyContainer);
 
@@ -373,7 +373,7 @@ window.addEventListener('click', e =>{
 			let EditHistoryBackButton = document.createElement('button');
 			EditHistoryBackButton.setAttribute('class','edit-contact-history-back-button');
 			EditHistoryBackButton.innerHTML='bak';
-			historyContainer.append(EditHistoryBackButton);
+			editContactContainer.append(EditHistoryBackButton);
 
 		}
 	});
@@ -381,13 +381,26 @@ window.addEventListener('click', e =>{
 			
 
 		
-			
+		let aNumber=0;
 			window.addEventListener('click', e =>{
 				if(e.target.closest('.edit-contact-history-back-button')){
 					
-					console.log(contactToEdit[0].id);
-					let showEditedContact2 = JSON.parse(localStorage.getItem(contactToEdit[0].id+'.1'));
-					console.log(showEditedContact2);
+					//console.log('The storage'+localStorage);
+					//console.log(contactToEdit[0].id);
+					this.historyContainer.innerHTML='';
+
+
+					let showEditedContact2 = JSON.parse(localStorage.getItem(contactToEdit[0].id+'.'+aNumber));
+					//aNumber++;
+					//let showEditedContact2 = JSON.parse(localStorage.getItem(contactToEdit[0].id+'.'+contactToEdit.editVersion));
+
+					for(let key in showEditedContact2){
+						let val = showEditedContact2[key];
+						let container= document.createElement('p');
+						container.innerHTML=key+' '+val;
+						this.historyContainer.append(container);
+					}	
+				
 				}
 			});
 
@@ -426,7 +439,7 @@ window.addEventListener('click', e =>{
 
 
 			//localStorage.clear();
-		
+			
 			console.log(localStorage);
 
 			

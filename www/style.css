@@ -111,6 +111,7 @@ aside{
    /* border:solid red 2px;*/
     height:400px;
     padding-top:40px;
+    border:solid red 2px;
 }
 .edit-contact-container input{
     display:block;
