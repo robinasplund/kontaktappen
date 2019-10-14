@@ -34,12 +34,18 @@ divContainer.append(aside);
 
 
 //localStorage.clear();
+
+
+
+
+
+
 // ******** OBJECT CREATE ******** //
 
 //--my array of contact objects--//
 let arrayOfContacts =[];
 //-- contact id generator
-let idGenerator = 3;
+let idGenerator = 4;
 
 const contactPrototype ={
 	id:'',
@@ -70,6 +76,15 @@ arrayOfContacts.push(robban);
 let bella = new createContact(2,'bella beckström',['78654324'],['bella@yahoo.com','bella2@hotmail.com'],'0');
 arrayOfContacts.push(bella );
 
+let olle = new createContact(
+	3,
+	'Olle Andersson',
+	['040-134783','0708-183456','0739969500'],
+	['olle@yahoo.com','olle@hotmail.com','olle@gmail.com'],
+	'0'
+);
+arrayOfContacts.push(olle);
+
 
 
 
@@ -92,17 +107,17 @@ function displayContacts(){
 		contactLogo.setAttribute('class','contact-logo');
 		contactContainer.append(contactLogo);
 
-		let editContactButton = document.createElement('button');
-		editContactButton.setAttribute('class','edit-contact-button');
-		editContactButton.setAttribute('id',contactItem.id);
-		editContactButton.innerHTML="R";
-		contactContainer.append(editContactButton);
-
-		let removeContactButton = document.createElement('button');
+		let removeContactButton = document.createElement('div');
 		removeContactButton.setAttribute('class','remove-contact-button');
 		removeContactButton.setAttribute('id',contactItem.id);
-		removeContactButton.innerHTML= 'X';
+		//removeContactButton.innerHTML= 'X';
 		contactContainer.append(removeContactButton);
+
+		let editContactButton = document.createElement('div');
+		editContactButton.setAttribute('class','edit-contact-button');
+		editContactButton.setAttribute('id',contactItem.id);
+		//editContactButton.innerHTML="R";
+		contactContainer.append(editContactButton);
 		
 		// name
 		let contactInfoListName = document.createElement('p');
