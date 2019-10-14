@@ -187,6 +187,12 @@ let addContactContainer = document.createElement('div');
 addContactContainer.setAttribute('class','add-contact-container');
 aside.append(addContactContainer);
 
+addContactContainerHeading= document.createElement('h3');
+addContactContainerHeading.setAttribute('class','add-contact-container-heading');
+addContactContainerHeading.innerHTML='Lägg till en ny kontakt';
+addContactContainer.append(addContactContainerHeading);
+
+
 // name
 let input = document.createElement('input');
 input.setAttribute('type','text');
@@ -274,6 +280,11 @@ window.addEventListener('click', e =>{
 	let editContactContainer = document.createElement('div');
 	editContactContainer.setAttribute('class','edit-contact-container');
 	aside.append(editContactContainer);
+
+	editContactContainerHeading= document.createElement('h3');
+	editContactContainerHeading.setAttribute('class','edit-contact-container-heading');
+	editContactContainerHeading.innerHTML='Redigera en kontakt';
+	editContactContainer.append(editContactContainerHeading);
 
 	let contactToEdit;
 	window.addEventListener('click', e => {

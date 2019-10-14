@@ -1,4 +1,7 @@
-
+body{
+    margin:0px;
+    padding:0px;
+}
 header{
     background-color:#339966;
 }
@@ -15,12 +18,14 @@ header{
     vertical-align:top;
     margin-left:30px;
     font-family: 'Gloria Hallelujah', cursive;
+    text-shadow: 2px 2px gray;
 }
 
 section{
-    width:80%;
+    width:79%;
     display:inline-block;
     margin-top:20px;
+    margin-left:1%;
 }
 
 
@@ -110,20 +115,23 @@ aside{
     /*display:none;*/
 }
 .add-contact-container{
-    /*border:solid black 2px;*/
+    /*border:solid black 1px;*/
+    text-align:center;
+    position:relative;
+    bottom:75px;
+}
+.add-contact-container-heading{
+    font-family: 'Gloria Hallelujah', cursive;
+    /*text-decoration:underline;*/
 }
 .add-contact-input-name{
     width:50%;
-    margin-left:25%;
-    margin-top:50px;
 }
 .add-contact-input-phone{
-    width:50%;
-    margin-left:25%;   
+    width:50%; 
 }
 .add-contact-input-email{
-    width:50%;
-    margin-left:25%;   
+    width:50%;  
 }
 .add-contact-submit-button{
     display:block;
@@ -136,9 +144,14 @@ aside{
 .edit-contact-container{
     background-color:#339966;
    /* border:solid red 2px;*/
-    height:400px;
-    padding-top:40px;
-    border:solid red 2px;
+    height:428px;
+    /*border:solid black 1px;*/
+    position:relative;
+    bottom:50px;
+    text-align:center;
+}
+.edit-contact-container-heading{
+    font-family: 'Gloria Hallelujah', cursive;
 }
 .edit-contact-container input{
     display:block;
@@ -152,4 +165,5 @@ aside{
 
 .edit-contact-history-container{
     border:solid 2px orange;
+    line-height:0.3;
 }
