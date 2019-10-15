@@ -120,17 +120,16 @@ aside{
     position:relative;
     bottom:120px;
 }
-.add-contact-container-heading{
+.add-contact-heading{
     font-family: 'Gloria Hallelujah', cursive;
-    /*text-decoration:underline;*/
 }
-.add-contact-input-name{
+.add-contact-name{
     width:80%;
 }
-.add-contact-input-phone{
+.add-contact-phone{
     width:80%; 
 }
-.add-contact-input-email{
+.add-contact-email{
     width:80%;  
 }
 .add-contact-submit-button{

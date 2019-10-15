@@ -68,9 +68,8 @@ function displayContacts(){
 
 	section.innerHTML ='';
 	arrayOfContacts.sort(sortArrayOfContacts);
-
 	for (contactItem of arrayOfContacts){
-	
+
 		let contactContainer = createElement(section, 'div', '', 'class', 'contact-container');
 		let contactLogo = createElement(contactContainer, 'div', '<img src="./person-logo.png">', 'class', 'contact-logo');
 		let removeContactButton = createElement(contactContainer, 'div', '', 'class', 'remove-contact-button');
@@ -91,111 +90,52 @@ function displayContacts(){
 displayContacts();
 
 
-
-
-//-------------- REMOVE CONTACTS FROM THE DOM --------------//
+/********** REMOVE CONTACTS **********/
 
 window.addEventListener('click', e => {
-	if(e.target.closest('.remove-contact-button')){
-		
+	if(e.target.closest('.remove-contact-button')){		
 		arrayOfContacts=arrayOfContacts.filter(function(item){
 			return item.id != e.target.id;
 		});
-
 		displayContacts();
 	}
 });
 
+/********** ADD CONTACTS **********/
 
+let addContactContainer = createElement(aside, 'div', '', 'class', 'add-contact-container');
+let addContactHeading = createElement(addContactContainer, 'h3', 'Lägg till en ny kontakt', 'class', 'add-contact-heading');
+let addContactName = createElement(addContactContainer, 'input', '', 'class', 'add-contact-name');
+	addContactName.setAttribute('type','text');
+	addContactName.setAttribute('placeholder','namn');
+for(let i=1; i<4; i++){
+	let addContactPhone = createElement(addContactContainer, 'input', '', 'class', 'add-contact-phone add-contact-phone'+i);
+	addContactPhone.setAttribute('type','text');
+	addContactPhone.setAttribute('placeholder','telefonnummer');
+}
+for(let i=1; i<4; i++){
+	let addContactEmail = createElement(addContactContainer, 'input', '', 'class', 'add-contact-email add-contact-email'+i);
+	addContactEmail.setAttribute('type','text');
+	addContactEmail.setAttribute('placeholder','emailadress');
+}
+let addContactSubmitButton = createElement(addContactContainer, 'button', 'lägg till', 'class', 'add-contact-submit-button');
+	addContactSubmitButton.setAttribute('type','button');
 
-
-//------------ Add Contact ---------------//
-
-let addContactContainer = document.createElement('div');
-addContactContainer.setAttribute('class','add-contact-container');
-aside.append(addContactContainer);
-
-addContactContainerHeading= document.createElement('h3');
-addContactContainerHeading.setAttribute('class','add-contact-container-heading');
-addContactContainerHeading.innerHTML='Lägg till en ny kontakt';
-addContactContainer.append(addContactContainerHeading);
-
-
-// name
-let input = document.createElement('input');
-input.setAttribute('type','text');
-input.setAttribute('placeholder','namn');
-input.setAttribute('class','add-contact-input-name');
-addContactContainer.append(input);
-// phone
-let input2 = document.createElement('input');
-input2.setAttribute('type','text');
-input2.setAttribute('placeholder','telefonnummer');
-input2.setAttribute('class','add-contact-input-phone add-contact-input-phone1');
-addContactContainer.append(input2);
-
-let input3 = document.createElement('input');
-input3.setAttribute('type','text');
-input3.setAttribute('placeholder','telefonnummer');
-input3.setAttribute('class','add-contact-input-phone add-contact-input-phone2');
-addContactContainer.append(input3);
-
-let input4 = document.createElement('input');
-input4.setAttribute('type','text');
-input4.setAttribute('placeholder','telefonnummer');
-input4.setAttribute('class','add-contact-input-phone add-contact-input-phone3');
-addContactContainer.append(input4);
-
-// email
-let input5 = document.createElement('input');
-input5.setAttribute('type','text');
-input5.setAttribute('placeholder','emailadress');
-input5.setAttribute('class','add-contact-input-email add-contact-input-email1');
-addContactContainer.append(input5);
-
-let input6 = document.createElement('input');
-input6.setAttribute('type','text');
-input6.setAttribute('placeholder','emailadress');
-input6.setAttribute('class','add-contact-input-email add-contact-input-email2');
-addContactContainer.append(input6);
-
-let input7 = document.createElement('input');
-input7.setAttribute('type','text');
-input7.setAttribute('placeholder','emailadress');
-input7.setAttribute('class','add-contact-input-email add-contact-input-email3');
-addContactContainer.append(input7);
-
-// submit button
-let button = document.createElement('button');
-button.setAttribute('type','button');
-button.setAttribute('class','add-contact-submit-button');
-button.innerHTML='lägg till';
-addContactContainer.append(button);
-
-//edit container header
-editContactContainerHeading= document.createElement('h3');
-editContactContainerHeading.setAttribute('class','edit-contact-container-heading');
-editContactContainerHeading.innerHTML='Redigera en kontakt';
-addContactContainer.append(editContactContainerHeading);
-
-// Adding a contact
+// Adding a contact submit logic
 window.addEventListener('click', e =>{
   if(e.target.closest('.add-contact-submit-button')){
 
 		let addContactId = idGenerator; 
-		let addContactName = document.querySelector('.add-contact-input-name').value;
-	
-		let addContactPhone1 = document.querySelector('.add-contact-input-phone1').value;		
-		let addContactPhone2 = document.querySelector('.add-contact-input-phone2').value;
-		let addContactPhone3 = document.querySelector('.add-contact-input-phone3').value;
+		let addContactName = document.querySelector('.add-contact-name').value;	
+		let addContactPhone1 = document.querySelector('.add-contact-phone1').value;		
+		let addContactPhone2 = document.querySelector('.add-contact-phone2').value;
+		let addContactPhone3 = document.querySelector('.add-contact-phone3').value;
+		let addContactEmail1 = document.querySelector('.add-contact-email1').value;
+		let addContactEmail2 = document.querySelector('.add-contact-email2').value;
+		let addContactEmail3 = document.querySelector('.add-contact-email3').value;
 
 		let arrayOfPhonenumbers=[addContactPhone1,addContactPhone2,addContactPhone3];
 		let arrayOfPhonenumbers2 = arrayOfPhonenumbers.filter(function(v){return v!==''});
-
-		let addContactEmail1 = document.querySelector('.add-contact-input-email1').value;
-		let addContactEmail2 = document.querySelector('.add-contact-input-email2').value;
-		let addContactEmail3 = document.querySelector('.add-contact-input-email3').value;
-
 		let arrayOfEmails=[addContactEmail1,addContactEmail2,addContactEmail3];
 		let arrayOfEmails2 = arrayOfEmails.filter(function(v){return v!==''});
 	
@@ -210,6 +150,12 @@ window.addEventListener('click', e =>{
 
 
 //---------------- EDIT CONTACTS ---------------//
+
+/*//edit container header
+editContactContainerHeading= document.createElement('h3');
+editContactContainerHeading.setAttribute('class','edit-contact-container-heading');
+editContactContainerHeading.innerHTML='Redigera en kontakt';
+addContactContainer.append(editContactContainerHeading);*/
 
 	let editContactContainer = document.createElement('div');
 	editContactContainer.setAttribute('class','edit-contact-container');
