@@ -1,50 +1,35 @@
-// ******** CREATING THE HTML BODY *************
-
-let body = document.querySelector('body');
-
-// container div
-let divContainer = document.createElement('div');
-divContainer.setAttribute('class', 'container');
-body.append(divContainer);
-
-// header
-let header = document.createElement('header');
-divContainer.append(header);
-
-// logo
-let logo= document.createElement('div');
-logo.innerHTML= "<img src='./contact-logo.png'>";
-logo.setAttribute('class','logo');
-header.append(logo);
-
-// heading
-let heading = document.createElement('h2');
-heading.setAttribute('class','heading');
-heading.innerHTML="Dat´z kontaktëen liste";
-header.append(heading);
-
-// section
-let section = document.createElement('section');
-divContainer.append(section);
-
-// aside
-let aside = document.createElement('aside');
-aside.setAttribute('id','aside-container');
-divContainer.append(aside);
-
 
 //localStorage.clear();
+//createElement(div, 'p', 'HELLO THERE AWESOME', 'class', 'fine-div fontsize');
+
+function createElement(daddyElement, element, innerHTMLString, attribute, attributeName) {
+	element = document.createElement(element);
+	element.innerHTML = innerHTMLString ? innerHTMLString : '';
+	element.setAttribute(attribute, attributeName);
+	daddyElement.append(element);
+	return element
+  }
+  
+/********** CREATING THE HTML BODY **********/
+
+let body = document.querySelector('body');
+// container div
+let divContainer = createElement(body, 'div', '', 'class', 'div-container');
+// header
+let header = createElement(divContainer, 'header', '', 'class', 'header');
+// logo
+let logo = createElement(header, 'div', '<img src="./contact-logo.png">', 'class', 'logo');
+// heading
+let heading = createElement(header, 'h2', 'Dat´z kontaktëen liste', 'class', 'heading');
+// section
+let section = createElement(divContainer, 'section', '', 'class', 'section');
+// aside 
+let aside = createElement(divContainer, 'aside', '', 'id', 'aside-container');
 
 
+/********** LOGIC TO MAKE CONTACT OBJECTS **********/
 
-
-
-
-// ******** OBJECT CREATE ******** //
-
-//--my array of contact objects--//
 let arrayOfContacts =[];
-//-- contact id generator
 let idGenerator = 4;
 
 const contactPrototype ={
@@ -54,7 +39,6 @@ const contactPrototype ={
 	emails:[],
 	editVersion:''
 }
-
 function createContact(id,name,phoneNumbers,emails,editVersion){
 	let newInstance = Object.create(contactPrototype);
 	newInstance.id=id;
@@ -65,26 +49,14 @@ function createContact(id,name,phoneNumbers,emails,editVersion){
 	return newInstance;
 }
 
-
-
-let manne = new createContact(0,'Sven Bertilsson',['0462118787','099999999'],['kent@mail.com'],'0');
-arrayOfContacts.push(manne);
-
-let robban = new createContact(1,'Robban aspland',['0799019897'],['rob@hotmail.com','rob2@hotmail.com'],'0');
-arrayOfContacts.push(robban);
-
-let bella = new createContact(2,'Bella beckström',['78654324'],['bella@yahoo.com','bella2@hotmail.com'],'0');
-arrayOfContacts.push(bella );
-
-let olle = new createContact(
-	3,
-	'Olle Andersson',
-	['040-134783','0708-183456','0739969500'],
-	['olle@yahoo.com','olle@hotmail.com','olle@gmail.com'],
-	'0'
-);
+let sven = new createContact(0,'Sven Bertilsson',['046-2118787','0708-180922'],['sven_bertilsson@mail.com'],'0');
+arrayOfContacts.push(sven);
+let gustav = new createContact(1,'Gustav Bengtsson',['040-127783'],['gustav_b@hotmail.com','gustav99@hotmail.com'],'0');
+arrayOfContacts.push(gustav);
+let bella = new createContact(2,'Bella Beckström',['040-189923','0706267384'],['bellabella@yahoo.com','bella24@hotmail.com'],'0');
+arrayOfContacts.push(bella);
+let olle = new createContact(3,'Olle Andersson',['040-134783','0708-183456','0739969500'],['olle@yahoo.com','olle@hotmail.com','olle@gmail.com'],'0');
 arrayOfContacts.push(olle);
-
 
 function sortArrayOfContacts( a, b ) {
 	if ( a.name < b.name ){
@@ -95,17 +67,14 @@ function sortArrayOfContacts( a, b ) {
 	}
 	return 0;
   }
-  
- 
-
-
-
-
-//-------- DISPLAY CONTACTS ARRAY IN THE DOM -------------//
+   
+/********** DISPLAY CONTACTS ARRAY IN THE DOM **********/
 
 function displayContacts(){
+
 	section.innerHTML ='';
-	arrayOfContacts.sort( sortArrayOfContacts );
+	arrayOfContacts.sort(sortArrayOfContacts);
+
 	for (contactItem of arrayOfContacts){
 
 		//console.log(contactItem);
@@ -501,64 +470,6 @@ window.addEventListener('click', e =>{
 
 
 
-
-
-
-/* EVENT LISTENER
-window.addEventListener('click', e =>{
-  if(e.target.closest('.info-text')){
-		console.log('p tagish');
-	}
-	if(e.target.closest('h1')){
-		console.log('rubriken');
-	}
-});
-/*
-
-/*LOCAL STORAGE*/
-
-
-//localStorage.clear();
-/*
-localStorage.setItem(
-	'name','bosse'
-
-);*/
-//localStorage.removeItem('name');
-//let x= localStorage.getItem('name');
-//console.log(localStorage.key(0))
-
-/*
-let a='name';
-let b = 'robban'
-localStorage.setItem(a,b);
-console.log(localStorage);
-*/
-/*
-let myObj = {
-	name: "robert",
-	age: 35
-} */
-/*
-localStorage.setItem("myObj",myObj);
-console.log(localStorage);
-
-let x= localStorage.getItem("myObj");
-console.log(x);
-let y= localStorage.getItem("myObj").name;
-console.log(y); */
-
-
-
-
-//let myObj2 = JSON.stringify(myObj);
-//console.log(myObj2);
-//localStorage.setItem('myObj2',myObj2);
-//console.log(localStorage);
-
-//let myObj3 = JSON.parse(localStorage.getItem("myObj2"));
-
-//console.log(myObj3.name);
 
 
 
