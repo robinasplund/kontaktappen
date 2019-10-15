@@ -13,17 +13,11 @@ function createElement(daddyElement, element, innerHTMLString, attribute, attrib
 /********** CREATING THE HTML BODY **********/
 
 let body = document.querySelector('body');
-// container div
 let divContainer = createElement(body, 'div', '', 'class', 'div-container');
-// header
 let header = createElement(divContainer, 'header', '', 'class', 'header');
-// logo
 let logo = createElement(header, 'div', '<img src="./contact-logo.png">', 'class', 'logo');
-// heading
 let heading = createElement(header, 'h2', 'Dat´z kontaktëen liste', 'class', 'heading');
-// section
 let section = createElement(divContainer, 'section', '', 'class', 'section');
-// aside 
 let aside = createElement(divContainer, 'aside', '', 'id', 'aside-container');
 
 
@@ -76,58 +70,23 @@ function displayContacts(){
 	arrayOfContacts.sort(sortArrayOfContacts);
 
 	for (contactItem of arrayOfContacts){
-
-		//console.log(contactItem);
 	
-		let contactContainer =  document.createElement('div');
-		contactContainer.setAttribute('class','contact-container');
-
-		let contactLogo= document.createElement('div');
-		contactLogo.innerHTML= "<img src='./person-logo.png'>";
-		contactLogo.setAttribute('class','contact-logo');
-		contactContainer.append(contactLogo);
-
-		let removeContactButton = document.createElement('div');
-		removeContactButton.setAttribute('class','remove-contact-button');
-		removeContactButton.setAttribute('id',contactItem.id);
-		//removeContactButton.innerHTML= 'X';
-		contactContainer.append(removeContactButton);
-
-		let editContactButton = document.createElement('div');
-		editContactButton.setAttribute('class','edit-contact-button');
-		editContactButton.setAttribute('id',contactItem.id);
-		//editContactButton.innerHTML="R";
-		contactContainer.append(editContactButton);
-		
-		// name
-		let contactInfoListName = document.createElement('p');
-		contactInfoListName.setAttribute('class','name');
-		contactInfoListName.innerHTML= contactItem.name;
-		contactContainer.append(contactInfoListName);
-	
-		//phone
-		let ul = document.createElement('ul');
-		ul.setAttribute('class','phonenumber-list');
-		contactContainer.append(ul);
+		let contactContainer = createElement(section, 'div', '', 'class', 'contact-container');
+		let contactLogo = createElement(contactContainer, 'div', '<img src="./person-logo.png">', 'class', 'contact-logo');
+		let removeContactButton = createElement(contactContainer, 'div', '', 'class', 'remove-contact-button');
+			removeContactButton.setAttribute('id',contactItem.id);
+		let editContactButton = createElement(contactContainer, 'div', '', 'class', 'edit-contact-button');
+			editContactButton.setAttribute('id',contactItem.id);
+		let contactName = createElement(contactContainer, 'p', contactItem.name, 'class', 'contact-name');		
+		let contactUl1 = createElement(contactContainer, 'ul', '', 'class', 'phonenumber-list');
 		for(phoneNumber of contactItem.phoneNumbers ){
-			let li = document.createElement('li');
-			li.innerHTML= phoneNumber;
-			ul.append(li);
+			let li = createElement(contactUl1, 'li', phoneNumber, 'class', '');
 		}
-	
-		// email
-		let ul2 = document.createElement('ul');
-		ul2.setAttribute('class','email-list');
-		contactContainer.append(ul2);
+		let contactUl2 = createElement(contactContainer, 'ul', '', 'class', 'email-list');
 		for(email of contactItem.emails ){
-			let li = document.createElement('li');
-			li.innerHTML= email;
-			ul2.append(li);
+			let li = createElement(contactUl2, 'li', email, 'class', '');
 		}
-	
-		section.append(contactContainer);
-	}
-	
+	}	
 }
 displayContacts();
 
