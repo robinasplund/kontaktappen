@@ -244,6 +244,12 @@ button.setAttribute('class','add-contact-submit-button');
 button.innerHTML='lägg till';
 addContactContainer.append(button);
 
+//edit container header
+editContactContainerHeading= document.createElement('h3');
+editContactContainerHeading.setAttribute('class','edit-contact-container-heading');
+editContactContainerHeading.innerHTML='Redigera en kontakt';
+addContactContainer.append(editContactContainerHeading);
+
 // Adding a contact
 window.addEventListener('click', e =>{
   if(e.target.closest('.add-contact-submit-button')){
@@ -281,22 +287,16 @@ window.addEventListener('click', e =>{
 	editContactContainer.setAttribute('class','edit-contact-container');
 	aside.append(editContactContainer);
 
-	editContactContainerHeading= document.createElement('h3');
-	editContactContainerHeading.setAttribute('class','edit-contact-container-heading');
-	editContactContainerHeading.innerHTML='Redigera en kontakt';
-	editContactContainer.append(editContactContainerHeading);
-
 	let contactToEdit;
 	window.addEventListener('click', e => {
 		if(e.target.closest('.edit-contact-button')){
 
 			editContactContainer.innerHTML='';
+			aNumber=0;
 
 			contactToEdit =arrayOfContacts.filter(function(object){
 				return object.id == e.target.id;
 			});
-
-			//alert(contactToEdit.name);
 				
 			let contactToEditName;
 			let contactToEditPhone1;
@@ -412,23 +412,29 @@ window.addEventListener('click', e =>{
 			EditHistoryBackButton.innerHTML='bak';
 			editContactContainer.append(EditHistoryBackButton);
 
+			let EditHistoryForwardButton = document.createElement('button');
+			EditHistoryForwardButton.setAttribute('class','edit-contact-history-forward-button');
+			EditHistoryForwardButton.innerHTML='fram';
+			editContactContainer.append(EditHistoryForwardButton);
+
 		}
 	});
 
-			
-
-		
+			/************HISTORY LOGICZ**********/		
+			//going back
 		let aNumber=0;
 			window.addEventListener('click', e =>{
 				if(e.target.closest('.edit-contact-history-back-button')){
 					
+					aNumber++;
+					console.log('anumbah'+aNumber);
 					//console.log('The storage'+localStorage);
 					//console.log(contactToEdit[0].id);
 					this.historyContainer.innerHTML='';
 
 
 					let showEditedContact2 = JSON.parse(localStorage.getItem(contactToEdit[0].id+'.'+aNumber));
-					//aNumber++;
+					
 					//let showEditedContact2 = JSON.parse(localStorage.getItem(contactToEdit[0].id+'.'+contactToEdit.editVersion));
 
 					for(let key in showEditedContact2){
@@ -440,6 +446,25 @@ window.addEventListener('click', e =>{
 				
 				}
 			});
+			//going forward
+			window.addEventListener('click', e =>{
+				if(e.target.closest('.edit-contact-history-forward-button')){
+					
+					aNumber--;
+					console.log('anumbah'+aNumber);
+					this.historyContainer.innerHTML='';
+					let showEditedContact2 = JSON.parse(localStorage.getItem(contactToEdit[0].id+'.'+aNumber));
+					for(let key in showEditedContact2){
+						let val = showEditedContact2[key];
+						let container= document.createElement('p');
+						container.innerHTML=key+' '+val;
+						this.historyContainer.append(container);
+					}	
+				
+				}
+			});
+
+		
 
 	
 	window.addEventListener('click', e => {
