@@ -251,12 +251,12 @@ window.addEventListener('click', e => {
 });
 
 
-let versionCounter =1;
+let versionCounter =0;
 // BACK AND FORWARD BUTTONS
 window.addEventListener('click', e => {
 	if(e.target.closest('.toolbar-history-back-button')){		
 
-	
+		versionCounter++;
 			// Show history section
 		  document.getElementById("toolbar-history-section").remove();
 			let toolbarHistorySection =createElement(aside, 'div', '', 'id', 'toolbar-history-section');
@@ -275,12 +275,33 @@ window.addEventListener('click', e => {
 			
 		let toolbarHistoryBackButton =createElement(toolbarHistorySection, 'div', '', 'class', 'toolbar-history-back-button');
 		let toolbarHistoryForwardButton =createElement(toolbarHistorySection, 'div', '', 'class', 'toolbar-history-forward-button');
-		versionCounter++;
+		
 	}
 });
 window.addEventListener('click', e => {
 	if(e.target.closest('.toolbar-history-forward-button')){		
-		alert('fram');
+		
+			versionCounter--;		
+			// Show history section
+		  document.getElementById("toolbar-history-section").remove();
+			let toolbarHistorySection =createElement(aside, 'div', '', 'id', 'toolbar-history-section');
+			let loadEditsHistory = JSON.parse(localStorage.getItem(contactToEdit.id+'.'+versionCounter));
+	
+			let historyName =createElement(toolbarHistorySection, 'p', loadEditsHistory.name, 'class', 'contact-name');
+			let Ul1 = createElement(toolbarHistorySection, 'ul', '', 'class', 'phonenumber-list');
+			for(phoneNumber of loadEditsHistory.phoneNumbers){
+				let li = createElement(Ul1, 'li', phoneNumber, 'class', 'history-li');
+			}
+			let Ul2 = createElement(toolbarHistorySection, 'ul', '', 'class', 'email-list');
+			for(email of loadEditsHistory.emails){
+				let li = createElement(Ul2, 'li', email, 'class', 'history-li');
+				console.log(email);
+			}
+			
+		let toolbarHistoryBackButton =createElement(toolbarHistorySection, 'div', '', 'class', 'toolbar-history-back-button');
+		let toolbarHistoryForwardButton =createElement(toolbarHistorySection, 'div', '', 'class', 'toolbar-history-forward-button');
+		
+
 	}
 });
 
