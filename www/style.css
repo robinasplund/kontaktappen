@@ -21,6 +21,16 @@ header{
     font-family: 'Gloria Hallelujah', cursive;
 }
 
+.add-contact-button{
+    font-family: 'Gloria Hallelujah', cursive;
+    float:right;
+    border:solid 1px black;
+    margin-top:40px;
+    margin-right:150px;
+    cursor:pointer;
+}
+
+
 section{
     width:79%;
     display:inline-block;
@@ -106,33 +116,28 @@ section{
 
 /******** ASIDE ********/
 
-aside{
-    background-color:#339966;
+#aside-container{
+    background-color:#94c7ae;
     width:20%;
     height:500px;
     display:inline-block;
     vertical-align:top;
-    /*display:none;*/
-}
-.add-contact-container{
-    /*border:solid black 1px;*/
+    display:none;
     text-align:center;
-    position:relative;
-    bottom:120px;
+    padding-top:50px;
 }
-.add-contact-heading{
-    font-family: 'Gloria Hallelujah', cursive;
-}
-.add-contact-name{
+
+.toolbar-name{
     width:80%;
+
 }
-.add-contact-phone{
+.toolbar-phone{
     width:80%; 
 }
-.add-contact-email{
+.toolbar-email{
     width:80%;  
 }
-.add-contact-submit-button{
+.toolbar-save-button{
     display:block;
     margin:auto;
     margin-top:20px;

@@ -17,6 +17,7 @@ let divContainer = createElement(body, 'div', '', 'class', 'div-container');
 let header = createElement(divContainer, 'header', '', 'class', 'header');
 let logo = createElement(header, 'div', '<img src="./contact-logo.png">', 'class', 'logo');
 let heading = createElement(header, 'h2', 'Dat´z kontaktëen liste', 'class', 'heading');
+let addContactButton = createElement(header, 'div', '<img src="./add-contact-icon.png">', 'class', 'add-contact-button');
 let section = createElement(divContainer, 'section', '', 'class', 'section');
 let aside = createElement(divContainer, 'aside', '', 'id', 'aside-container');
 
@@ -101,259 +102,161 @@ window.addEventListener('click', e => {
 	}
 });
 
+
+
+
+
 /********** ADD CONTACTS **********/
 
-let addContactContainer = createElement(aside, 'div', '', 'class', 'add-contact-container');
-let addContactHeading = createElement(addContactContainer, 'h3', 'Lägg till en ny kontakt', 'class', 'add-contact-heading');
-let addContactName = createElement(addContactContainer, 'input', '', 'class', 'add-contact-name');
-	addContactName.setAttribute('type','text');
-	addContactName.setAttribute('placeholder','namn');
-for(let i=1; i<4; i++){
-	let addContactPhone = createElement(addContactContainer, 'input', '', 'class', 'add-contact-phone add-contact-phone'+i);
-	addContactPhone.setAttribute('type','text');
-	addContactPhone.setAttribute('placeholder','telefonnummer');
-}
-for(let i=1; i<4; i++){
-	let addContactEmail = createElement(addContactContainer, 'input', '', 'class', 'add-contact-email add-contact-email'+i);
-	addContactEmail.setAttribute('type','text');
-	addContactEmail.setAttribute('placeholder','emailadress');
-}
-let addContactSubmitButton = createElement(addContactContainer, 'button', 'lägg till', 'class', 'add-contact-submit-button');
-	addContactSubmitButton.setAttribute('type','button');
+//add contact button logic
+window.addEventListener('click', e => {
+	if(e.target.closest('.add-contact-button')){		
+		addContactForm();
+	}
+});
 
-// Adding a contact submit logic
+function addContactForm(){
+
+	document.getElementById("aside-container").style.display = "inline-block";
+	document.getElementById("aside-container").innerHTML = "";
+
+	let toolbarName = createElement(aside, 'input', '', 'class', 'toolbar-name');
+	toolbarName.setAttribute('type','text');
+	toolbarName.setAttribute('placeholder','namn');
+
+	for(let i=0; i<3; i++){
+		let toolbarPhone = createElement(aside, 'input', '', 'class', 'toolbar-phone toolbar-phone'+i);
+		toolbarPhone.setAttribute('type','text');
+		toolbarPhone.setAttribute('placeholder','telefonnummer');
+	}
+	for(let i=0; i<3; i++){
+		let toolbarEmail = createElement(aside, 'input', '', 'class', 'toolbar-email toolbar-email'+i);
+		toolbarEmail.setAttribute('type','text');
+		toolbarEmail.setAttribute('placeholder','emailadress');
+	}
+	let toolbarSaveButton = createElement(aside, 'button', 'Spara', 'class', 'toolbar-save-button add-contact-save-button');
+	toolbarSaveButton.setAttribute('type','button');
+}
+
+// Add-contact save button logic
 window.addEventListener('click', e =>{
-  if(e.target.closest('.add-contact-submit-button')){
+  if(e.target.closest('.add-contact-save-button')){
 
-		let addContactId = idGenerator; 
-		let addContactName = document.querySelector('.add-contact-name').value;	
-		let addContactPhone1 = document.querySelector('.add-contact-phone1').value;		
-		let addContactPhone2 = document.querySelector('.add-contact-phone2').value;
-		let addContactPhone3 = document.querySelector('.add-contact-phone3').value;
-		let addContactEmail1 = document.querySelector('.add-contact-email1').value;
-		let addContactEmail2 = document.querySelector('.add-contact-email2').value;
-		let addContactEmail3 = document.querySelector('.add-contact-email3').value;
-
-		let arrayOfPhonenumbers=[addContactPhone1,addContactPhone2,addContactPhone3];
+		let ContactId = idGenerator; 
+		let Name = document.querySelector('.toolbar-name').value;	
+		let Phone1 = document.querySelector('.toolbar-phone0').value;		
+		let Phone2 = document.querySelector('.toolbar-phone1').value;
+		let Phone3 = document.querySelector('.toolbar-phone2').value;
+		let Email1 = document.querySelector('.toolbar-email0').value;
+		let Email2 = document.querySelector('.toolbar-email1').value;
+		let Email3 = document.querySelector('.toolbar-email2').value;
+		
+		let arrayOfPhonenumbers=[Phone1,Phone2,Phone3];
 		let arrayOfPhonenumbers2 = arrayOfPhonenumbers.filter(function(v){return v!==''});
-		let arrayOfEmails=[addContactEmail1,addContactEmail2,addContactEmail3];
+		let arrayOfEmails=[Email1,Email2,Email3];
 		let arrayOfEmails2 = arrayOfEmails.filter(function(v){return v!==''});
 	
-		let newContact = new createContact(addContactId,addContactName,arrayOfPhonenumbers2,arrayOfEmails2,'0');
+		let newContact = new createContact(ContactId,Name,arrayOfPhonenumbers2,arrayOfEmails2,'0');
 		arrayOfContacts.push(newContact); 
 		idGenerator++;
-		displayContacts();
+		document.getElementById("aside-container").style.display = "none";
+
+
+				//****************HISTORY STUFF***********/		
+			
+				let editVersionString =newContact.id+'.'+newContact.editVersion;
+				let newContact2 = JSON.stringify(newContact);			
+				localStorage.setItem(editVersionString,newContact2);
+	
+				//localStorage.clear();
+				console.log(localStorage);
+	
+				//************************************** */
+
+
+		displayContacts(); 		
 	}
 });
 
 
 
 
-//---------------- EDIT CONTACTS ---------------//
-
-/*//edit container header
-editContactContainerHeading= document.createElement('h3');
-editContactContainerHeading.setAttribute('class','edit-contact-container-heading');
-editContactContainerHeading.innerHTML='Redigera en kontakt';
-addContactContainer.append(editContactContainerHeading);*/
-
-	let editContactContainer = document.createElement('div');
-	editContactContainer.setAttribute('class','edit-contact-container');
-	aside.append(editContactContainer);
-
-	let contactToEdit;
-	window.addEventListener('click', e => {
-		if(e.target.closest('.edit-contact-button')){
-
-			editContactContainer.innerHTML='';
-			versionCounter=0;
-
-			contactToEdit =arrayOfContacts.filter(function(object){
-				return object.id == e.target.id;
-			});
-				
-			let contactToEditName;
-			let contactToEditPhone1;
-			let contactToEditPhone2;
-			let contactToEditPhone3;
-			let contactToEditEmail1;
-			let contactToEditEmail2;
-			let contactToEditEmail3;
-			for(let key of contactToEdit){
-				contactToEditName= key.name;
-				contactToEditPhone1= key.phoneNumbers[0];
-				contactToEditPhone2= key.phoneNumbers[1];
-				contactToEditPhone3= key.phoneNumbers[2];
-				contactToEditEmail1= key.emails[0];
-				contactToEditEmail2= key.emails[1];
-				contactToEditEmail3= key.emails[2];
-			}
-
-			let input8=document.createElement('input');
-			input8.setAttribute('class','edit-contact-input-name');
-			input8.setAttribute('value',contactToEditName);
-			editContactContainer.append(input8);
-
-			//phones
-			let input9=document.createElement('input');
-			input9.setAttribute('class','edit-contact-input-phone edit-contact-input-phone1');
-			if (contactToEditPhone1) {      
-				input9.setAttribute('value',contactToEditPhone1);
-			  }
-			else{
-				input9.setAttribute('placeholder','telefonnummer');
-			}
-			editContactContainer.append(input9);
-
-			let input10=document.createElement('input');
-			input10.setAttribute('class','edit-contact-input-phone edit-contact-input-phone2');
-			if (contactToEditPhone2) {      
-				input10.setAttribute('value',contactToEditPhone2);
-			  }
-			else{
-				input10.setAttribute('placeholder','telefonnummer');
-			}
-			editContactContainer.append(input10);
-
-			let input11=document.createElement('input');
-			input11.setAttribute('class','edit-contact-input-phone edit-contact-input-phone3');
-			if (contactToEditPhone3) {      
-				input11.setAttribute('value',contactToEditPhone3);
-			  }
-			else{
-				input11.setAttribute('placeholder','telefonnummer');
-			}
-			editContactContainer.append(input11);
-
-			//emails
-			let input12=document.createElement('input');
-			input12.setAttribute('class','edit-contact-input-email edit-contact-input-email1');
-			if (contactToEditEmail1) {      
-				input12.setAttribute('value',contactToEditEmail1);
-			  }
-			else{
-				input12.setAttribute('placeholder','emailadress');
-			}
-			editContactContainer.append(input12);
-
-			let input13=document.createElement('input');
-			input13.setAttribute('class','edit-contact-input-email edit-contact-input-email2');
-			if (contactToEditEmail2) {      
-				input13.setAttribute('value',contactToEditEmail2);
-			  }
-			else{
-				input13.setAttribute('placeholder','emailadress');
-			}
-			editContactContainer.append(input13);
-
-			let input14=document.createElement('input');
-			input14.setAttribute('class','edit-contact-input-email edit-contact-input-email3');
-			if (contactToEditEmail3) {      
-				input14.setAttribute('value',contactToEditEmail3);
-			  }
-			else{
-				input14.setAttribute('placeholder','emailadress');
-			}
-			editContactContainer.append(input14);
-
-			let button2 = document.createElement('button');
-			button2.setAttribute('type','button');
-			button2.setAttribute('class','edit-contact-submit-button');
-			button2.innerHTML='spara';
-			editContactContainer.append(button2);
 
 
-			//******* Display edit-history container and first edit *******/
+/********** EDIT CONTACTS **********/
 
-			this.historyContainer=document.createElement('div');
-			historyContainer.setAttribute('class','edit-contact-history-container');
-			editContactContainer.append(historyContainer);
+let contactToEdit;
 
-			showEditHistory(0);	
+window.addEventListener('click', e => {
+	if(e.target.closest('.edit-contact-button')){		
+			
+		document.getElementById("aside-container").style.display = "inline-block";
+		document.getElementById("aside-container").innerHTML = "";
 
-			/******Back in history buttons******/
-			let EditHistoryBackButton = document.createElement('button');
-			EditHistoryBackButton.setAttribute('class','edit-contact-history-back-button');
-			EditHistoryBackButton.innerHTML='bak';
-			editContactContainer.append(EditHistoryBackButton);
+		contactToEdit =arrayOfContacts.filter(function(object){
+			return object.id == e.target.id;
+		})[0];
 
-			let EditHistoryForwardButton = document.createElement('button');
-			EditHistoryForwardButton.setAttribute('class','edit-contact-history-forward-button');
-			EditHistoryForwardButton.innerHTML='fram';
-			editContactContainer.append(EditHistoryForwardButton);
+		let toolbarName = createElement(aside, 'input', '', 'class', 'toolbar-name');
+		toolbarName.setAttribute('type','text');
+		toolbarName.setAttribute('value',contactToEdit.name);
+
+		for(let i=0; i<3; i++){
+			let toolbarPhone = createElement(aside, 'input', '', 'class', 'toolbar-phone toolbar-phone'+i);
+			toolbarPhone.setAttribute('type','text');
+			if (contactToEdit.phoneNumbers[i]) { toolbarPhone.setAttribute('value',contactToEdit.phoneNumbers[i]); }
+			else{ toolbarPhone.setAttribute('placeholder','telefonnummer'); }		
 		}
-	});
+		for(let i=0; i<3; i++){
+			let toolbarEmail = createElement(aside, 'input', '', 'class', 'toolbar-email toolbar-email'+i);
+			toolbarEmail.setAttribute('type','text');
+			if (contactToEdit.emails[i]) { toolbarEmail.setAttribute('value',contactToEdit.emails[i]); }
+			else{ toolbarEmail.setAttribute('placeholder','emailadress'); }		
+		}
 
-			/************ History buttons logic *********/		
-			//going back
-			let versionCounter=0;
-			window.addEventListener('click', e =>{
-				if(e.target.closest('.edit-contact-history-back-button')){				
-					versionCounter++;
-					showEditHistory(versionCounter);				
-				}
-			});
-			//going forward
-			window.addEventListener('click', e =>{
-				if(e.target.closest('.edit-contact-history-forward-button')){					
-					versionCounter--;
-					showEditHistory(versionCounter);					
-				}
-			});
+		let toolbarSaveButton = createElement(aside, 'button', 'Spara', 'class', 'toolbar-save-button edit-contact-save-button');
+		toolbarSaveButton.setAttribute('type','button');
 
-			/******  Display edits function *********/
-			function showEditHistory(versionCounter){
-				this.historyContainer.innerHTML='';
-				let showEditedContact2 = JSON.parse(localStorage.getItem(contactToEdit[0].id+'.'+versionCounter));
-				for(let key in showEditedContact2){
-					let val = showEditedContact2[key];
-					let container= document.createElement('p');
-					container.innerHTML=key+' '+val;
-					this.historyContainer.append(container);
-				}	
-			}
+		}	
+});
 
+	//versionCounter=0; 
 	
 	window.addEventListener('click', e => {
-		if(e.target.closest('.edit-contact-submit-button')){
+		if(e.target.closest('.edit-contact-save-button')){
 
-			let editedContactName = document.querySelector('.edit-contact-input-name').value;
+			let Name = document.querySelector('.toolbar-name').value;	
+			let Phone1 = document.querySelector('.toolbar-phone0').value;		
+			let Phone2 = document.querySelector('.toolbar-phone1').value;
+			let Phone3 = document.querySelector('.toolbar-phone2').value;
+			let Email1 = document.querySelector('.toolbar-email0').value;
+			let Email2 = document.querySelector('.toolbar-email1').value;
+			let Email3 = document.querySelector('.toolbar-email2').value;
+			
+			let arrayOfPhonenumbers=[Phone1,Phone2,Phone3];
+			let arrayOfPhonenumbers2 = arrayOfPhonenumbers.filter(function(v){return v!==''});
+			let arrayOfEmails=[Email1,Email2,Email3];
+			let arrayOfEmails2 = arrayOfEmails.filter(function(v){return v!==''});
 
-			let editedContactPhone1 = document.querySelector('.edit-contact-input-phone1').value;
-			let editedContactPhone2 = document.querySelector('.edit-contact-input-phone2').value;
-			let editedContactPhone3 = document.querySelector('.edit-contact-input-phone3').value;
-
-			let arrayOfEditedPhonenumbers=[editedContactPhone1,editedContactPhone2,editedContactPhone3];
-			let arrayOfEditedPhonenumbers2 = arrayOfEditedPhonenumbers.filter(function(v){return v!==''});
-
-			let editedContactEmail1 = document.querySelector('.edit-contact-input-email1').value;
-			let editedContactEmail2 = document.querySelector('.edit-contact-input-email2').value;
-			let editedContactEmail3 = document.querySelector('.edit-contact-input-email3').value;
-
-			let arrayOfEditedEmails=[editedContactEmail1,editedContactEmail2,editedContactEmail3];
-			let arrayOfEditedEmails2 = arrayOfEditedEmails.filter(function(v){return v!==''});
-
-			let editedContact = new createContact(contactToEdit[0].id,editedContactName,arrayOfEditedPhonenumbers2,arrayOfEditedEmails2,contactToEdit[0].editVersion);			
+			contactToEdit.editVersion++;
+			let editedContact = new createContact(contactToEdit.id,Name,arrayOfPhonenumbers2,arrayOfEmails2,contactToEdit.editVersion);		
+			
 			let indexOfObject=arrayOfContacts.findIndex(x => x.id === editedContact.id);
 			arrayOfContacts.splice(indexOfObject,1,editedContact); 
 
-			contactToEdit[0].editVersion++;
-
-			let editVersionString = editedContact.id+'.'+editedContact.editVersion;
 
 			//****************HISTORY STUFF***********/		
+			let editVersionString = editedContact.id+'.'+editedContact.editVersion;
 			let editedContact2 = JSON.stringify(editedContact);			
-			//localStorage.setItem(editedContact.id,editedContact2);
 			localStorage.setItem(editVersionString,editedContact2);
 
-
 			//localStorage.clear();
-			
 			console.log(localStorage);
 
-			
 			//************************************** */
-				
+
+
+			document.getElementById("aside-container").style.display = "none";
 			displayContacts();
 		}
 	});
@@ -380,3 +283,5 @@ addContactContainer.append(editContactContainerHeading);*/
 
 
 
+
+	
