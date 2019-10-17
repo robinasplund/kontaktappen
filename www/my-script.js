@@ -25,7 +25,7 @@ let aside = createElement(divContainer, 'aside', '', 'id', 'aside-container');
 /********** LOGIC TO MAKE CONTACT OBJECTS **********/
 
 let arrayOfContacts =[];
-let idGenerator = 4;
+let idGenerator = 0;
 
 const contactPrototype ={
 	id:'',
@@ -43,7 +43,7 @@ function createContact(id,name,phoneNumbers,emails,editVersion){
 	newInstance.editVersion=editVersion;
 	return newInstance;
 }
-
+/*
 let sven = new createContact(0,'Sven Bertilsson',['046-2118787','0708-180922'],['sven_bertilsson@mail.com'],'0');
 arrayOfContacts.push(sven);
 let gustav = new createContact(1,'Gustav Bengtsson',['040-127783'],['gustav_b@hotmail.com','gustav99@hotmail.com'],'0');
@@ -52,7 +52,7 @@ let bella = new createContact(2,'Bella Beckström',['040-189923','0706267384'],[
 arrayOfContacts.push(bella);
 let olle = new createContact(3,'Olle Andersson',['040-134783','0708-183456','0739969500'],['olle@yahoo.com','olle@hotmail.com','olle@gmail.com'],'0');
 arrayOfContacts.push(olle);
-
+*/
 function sortArrayOfContacts( a, b ) {
 	if ( a.name < b.name ){
 	  return -1;
@@ -186,7 +186,6 @@ window.addEventListener('click', e =>{
 /********** EDIT CONTACTS **********/
 
 let contactToEdit;
-//let historySectionHtml;
 let versionCounter =0;
 
 window.addEventListener('click', e => {
@@ -216,11 +215,11 @@ window.addEventListener('click', e => {
 			else{ toolbarEmail.setAttribute('placeholder','emailadress'); }		
 		}
 
+		editHistoryHtml(versionCounter);	
+		let toolbarHistoryBackButton =createElement(aside, 'div', '', 'class', 'toolbar-history-back-button');
+		let toolbarHistoryForwardButton =createElement(aside, 'div', '', 'class', 'toolbar-history-forward-button');		
 		let toolbarSaveButton = createElement(aside, 'button', 'Spara', 'class', 'toolbar-save-button edit-contact-save-button');
 		toolbarSaveButton.setAttribute('type','button');
-
-		editHistoryHtml(versionCounter);	
-
 		}	
 });
 
@@ -254,14 +253,24 @@ function editHistoryHtml(versionCounter){
 			for(email of loadEditsHistory.emails){
 				let li = createElement(Ul2, 'li', email, 'class', 'history-li');
 				console.log(email);
-			}
-			
-		let toolbarHistoryBackButton =createElement(toolbarHistorySection, 'div', '', 'class', 'toolbar-history-back-button');
-		let toolbarHistoryForwardButton =createElement(toolbarHistorySection, 'div', '', 'class', 'toolbar-history-forward-button');
-
+			}		
+				
+/*
+		let html = `
+				<input type="text" class="edit-contact-input-name" value="${contactToEdit.name}">
+				${contactToEdit.phoneNumbers.map((num, i) =>  `
+					<input type="text" class="edit-contact-input-phone edit-contact-input-phone${i}" value="${num}">
+				` ).join('')}
+				${contactToEdit.emails.map((num, i) =>  `
+					<input type="text" class="edit-contact-input-email edit-contact-input-email${i}" value="${num}">
+				` ).join('')}
+			`
+			let div = document.createElement('div');
+			div.innerHTML = html;
+			editContactContainer.append(div);
+*/
 }
 
-	//versionCounter=0; 
 	
 	window.addEventListener('click', e => {
 		if(e.target.closest('.edit-contact-save-button')){
