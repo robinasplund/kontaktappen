@@ -217,7 +217,42 @@ window.addEventListener('click', e => {
 		let toolbarSaveButton = createElement(aside, 'button', 'Spara', 'class', 'toolbar-save-button edit-contact-save-button');
 		toolbarSaveButton.setAttribute('type','button');
 
+		// Show history section
+		let toolbarHistorySection =createElement(aside, 'div', '', 'class', 'toolbar-history-section');
+		let loadEditsHistory = JSON.parse(localStorage.getItem(contactToEdit.id+'.'+'0'));
+
+		let historyName =createElement(toolbarHistorySection, 'p', loadEditsHistory.name, 'class', 'contact-name');
+		let Ul1 = createElement(toolbarHistorySection, 'ul', '', 'class', 'phonenumber-list');
+		for(phoneNumber of loadEditsHistory.phoneNumbers){
+			let li = createElement(Ul1, 'li', phoneNumber, 'class', 'history-li');
+		}
+		let Ul2 = createElement(toolbarHistorySection, 'ul', '', 'class', 'email-list');
+		for(email of loadEditsHistory.emails){
+			let li = createElement(Ul2, 'li', email, 'class', 'history-li');
+			console.log(email);
+		}
+	
+	
+				//console.log(contactToEdit.id);
+				//console.log(localStorage);
+				//console.log('this history'+loadEditsHistory.phoneNumbers[0]);
+
+		let toolbarHistoryBackButton =createElement(aside, 'div', '', 'class', 'toolbar-history-back-button');
+		let toolbarHistoryForwardButton =createElement(aside, 'div', '', 'class', 'toolbar-history-forward-button');
+
 		}	
+});
+
+// BACK AND FORWARD BUTTONS
+window.addEventListener('click', e => {
+	if(e.target.closest('.toolbar-history-back-button')){		
+		alert('bak');
+	}
+});
+window.addEventListener('click', e => {
+	if(e.target.closest('.toolbar-history-forward-button')){		
+		alert('fram');
+	}
 });
 
 	//versionCounter=0; 

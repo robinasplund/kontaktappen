@@ -145,28 +145,26 @@ section{
 }
 
 
-.edit-contact-container{
+
+.toolbar-history-section{
     background-color:#339966;
-   /* border:solid red 2px;*/
-    height:428px;
-    border:solid black 3px;
-    position:relative;
-    bottom:120px;
-    text-align:center;
-}
-.edit-contact-container-heading{
-    font-family: 'Gloria Hallelujah', cursive;
-}
-.edit-contact-container input{
-    display:block;
+    width:80%;
     margin:auto;
+    margin-top:40px;
+    border-radius:3%;
 }
-.edit-contact-submit-button{
-    margin-top:15px;
+.toolbar-history-back-button{
+    width:20px;
+    height:20px;
+    background-image: url('./back-button.png');
+    display:inline-block;
+    cursor:pointer;
+}
+.toolbar-history-forward-button{
+    width:20px;
+    height:20px;
+    background-image: url('./forward-button.png');
+    display:inline-block;
+    cursor:pointer;
 }
 
-
-.edit-contact-history-container{
-    border:solid 2px orange;
-    line-height:0.6;
-}
