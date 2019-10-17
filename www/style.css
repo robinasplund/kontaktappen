@@ -146,12 +146,14 @@ section{
 
 
 
-.toolbar-history-section{
+#toolbar-history-section{
     background-color:#339966;
     width:80%;
     margin:auto;
     margin-top:40px;
     border-radius:3%;
+    border:solid red 6px;
+
 }
 .toolbar-history-back-button{
     width:20px;
