@@ -253,7 +253,8 @@ function editHistoryHtml(versionCounter){
 */				
 
 		let html = `
-				<div id="toolbar-history-section">
+				<div id="toolbar-history-section-inner">
+					<div class="upload-history-button"></div>
 					<p class="contact-name">${loadEditsHistory.name}</p>
 					<ul class="phonenumber-list">
 					${loadEditsHistory.phoneNumbers.map((num) => `<li>${num}</li>` ).join('')}
@@ -261,7 +262,7 @@ function editHistoryHtml(versionCounter){
 					<ul class="email-list">
 					${loadEditsHistory.emails.map((num) => `<li>${num}</li>` ).join('')}
 					</ul>
-					<button class="upload-history-button">Ladda upp</button>
+				</div>
 					<div class="toolbar-history-back-button"></div>
 					<div class="toolbar-history-forward-button"></div>
 					<button type="button" class="toolbar-save-button edit-contact-save-button">Spara</button>
@@ -301,6 +302,8 @@ window.addEventListener('click', e => {
 				if (contactToEdit.emails[i]) { toolbarEmail.setAttribute('value',loadEditsHistory.emails[i]); }
 				else{ toolbarEmail.setAttribute('placeholder','emailadress'); }		
 			}
+			let toolbarSaveButton = createElement(aside, 'button', 'Spara', 'class', 'toolbar-save-button edit-contact-save-button');
+			toolbarSaveButton.setAttribute('type','button');
 	}
 });
 

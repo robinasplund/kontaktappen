@@ -147,18 +147,35 @@ section{
 
 
 #toolbar-history-section{
-    background-color:#339966;
+    /*background-color:#339966;*/
     width:80%;
     margin:auto;
     margin-top:40px;
     border-radius:3%;
-    /*border:solid red 6px;*/
+    /*border:solid red 3px;*/
+    
+}
+#toolbar-history-section-inner{
+    background-color:#339966;
+    width:100%;
+    margin:auto;
+    margin-top:40px;
+    border-radius:3%;
+    /*border:solid blue 3px;*/
     
 }
 .upload-history-button{
-    border:solid orange 2px;
+    background-image: url('./upload-icon.png');
+    width:50px;
+    height:50px;
+    /*border:solid orange 2px;*/
     display:block;
     margin:auto;
+    margin-top:30px;
+    cursor:pointer;
+    position:relative;
+    left:20px;
+    bottom:5px;
 }
 .toolbar-history-back-button{
     width:20px;
