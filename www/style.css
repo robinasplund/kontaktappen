@@ -153,7 +153,12 @@ section{
     margin-top:40px;
     border-radius:3%;
     /*border:solid red 6px;*/
-
+    
+}
+.upload-history-button{
+    border:solid orange 2px;
+    display:block;
+    margin:auto;
 }
 .toolbar-history-back-button{
     width:20px;
