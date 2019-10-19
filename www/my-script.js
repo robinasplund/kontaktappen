@@ -190,6 +190,8 @@ let loadEditsHistory;
 
 window.addEventListener('click', e => {
 	if(e.target.closest('.edit-contact-button')){		
+
+		
 			
 		document.getElementById("aside-container").style.display = "inline-block";
 		document.getElementById("aside-container").innerHTML = "";
@@ -215,6 +217,10 @@ window.addEventListener('click', e => {
 			else{ toolbarEmail.setAttribute('placeholder','emailadress'); }		
 		}
 
+		/*alert(contactToEdit.editVersion);*/
+
+		versionCounter= contactToEdit.editVersion;
+
 		editHistoryHtml(versionCounter);	
 		}	
 });
@@ -223,22 +229,24 @@ window.addEventListener('click', e => {
 window.addEventListener('click', e => {
 	if(e.target.closest('.toolbar-history-back-button')){	
 		document.getElementById("toolbar-history-section").remove();		
-		versionCounter++;
+		versionCounter--;
 		editHistoryHtml(versionCounter);		
 	}
 });
 window.addEventListener('click', e => {
 	if(e.target.closest('.toolbar-history-forward-button')){				
 			document.getElementById("toolbar-history-section").remove();
-			versionCounter--;					
+			versionCounter++;					
 			editHistoryHtml(versionCounter);
 	}
 });
 
 function editHistoryHtml(versionCounter){
+	
 
 			let toolbarHistorySection =createElement(aside, 'div', '', 'id', 'toolbar-history-section');
 			loadEditsHistory = JSON.parse(localStorage.getItem(contactToEdit.id+'.'+versionCounter));
+			
 	/*
 			let historyName =createElement(toolbarHistorySection, 'p', loadEditsHistory.name, 'class', 'contact-name');
 			let Ul1 = createElement(toolbarHistorySection, 'ul', '', 'class', 'phonenumber-list');
@@ -280,7 +288,7 @@ window.addEventListener('click', e => {
 
 			document.getElementById("aside-container").innerHTML = "";
 			//let loadEditsHistory = JSON.parse(localStorage.getItem(contactToEdit.id+'.'+versionCounter));
-			console.log(loadEditsHistory);
+			//console.log(loadEditsHistory);
 
 			/*contactToEdit =arrayOfContacts.filter(function(object){
 				return object.id == e.target.id;
@@ -293,13 +301,13 @@ window.addEventListener('click', e => {
 			for(let i=0; i<3; i++){
 				let toolbarPhone = createElement(aside, 'input', '', 'class', 'toolbar-phone toolbar-phone'+i);
 				toolbarPhone.setAttribute('type','text');
-				if (contactToEdit.phoneNumbers[i]) { toolbarPhone.setAttribute('value',loadEditsHistory.phoneNumbers[i]); }
+				if (loadEditsHistory.phoneNumbers[i]) { toolbarPhone.setAttribute('value',loadEditsHistory.phoneNumbers[i]); }
 				else{ toolbarPhone.setAttribute('placeholder','telefonnummer'); }		
 			}
 			for(let i=0; i<3; i++){
 				let toolbarEmail = createElement(aside, 'input', '', 'class', 'toolbar-email toolbar-email'+i);
 				toolbarEmail.setAttribute('type','text');
-				if (contactToEdit.emails[i]) { toolbarEmail.setAttribute('value',loadEditsHistory.emails[i]); }
+				if (loadEditsHistory.emails[i]) { toolbarEmail.setAttribute('value',loadEditsHistory.emails[i]); }
 				else{ toolbarEmail.setAttribute('placeholder','emailadress'); }		
 			}
 			let toolbarSaveButton = createElement(aside, 'button', 'Spara', 'class', 'toolbar-save-button edit-contact-save-button');
