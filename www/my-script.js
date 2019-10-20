@@ -94,9 +94,19 @@ displayContacts();
 
 window.addEventListener('click', e => {
 	if(e.target.closest('.remove-contact-button')){		
+
+		let contactToRemove = arrayOfContacts.filter(function(item){
+			return item.id == e.target.id;
+		});
+
+		for(i=contactToRemove[0].editVersion; i>-1; i--){
+			localStorage.removeItem(contactToRemove[0].id+'.'+i);
+		}
+
 		arrayOfContacts=arrayOfContacts.filter(function(item){
 			return item.id != e.target.id;
 		});
+
 		displayContacts();
 	}
 });
