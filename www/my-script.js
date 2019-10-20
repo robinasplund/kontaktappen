@@ -168,7 +168,7 @@ window.addEventListener('click', e =>{
 		let newContact = new createContact(ContactId,Name,arrayOfPhonenumbers2,arrayOfEmails2,'0');
 		arrayOfContacts.push(newContact); 
 		idGenerator++;
-		document.getElementById("aside-container").style.display = "none";
+		//document.getElementById("aside-container").style.display = "none";
 
 
 				//****************HISTORY STUFF***********/		
@@ -269,8 +269,8 @@ function editHistoryHtml(versionCounter){
 				console.log(email);
 			}		
 */				
-
-		let html = `
+			if(loadEditsHistory){
+				let html = `
 				<div id="toolbar-history-section-inner">
 					<div class="upload-history-button"></div>
 					<p class="contact-name">${loadEditsHistory.name}</p>
@@ -285,9 +285,23 @@ function editHistoryHtml(versionCounter){
 					<div class="toolbar-history-forward-button"></div>
 					<button type="button" class="toolbar-save-button edit-contact-save-button">Spara</button>
 				`
-			let div = document.createElement('div');
-			div.innerHTML = html;
-			toolbarHistorySection.append(div);
+				let div = document.createElement('div');
+				div.innerHTML = html;
+				toolbarHistorySection.append(div);
+			}
+			else{
+				let html = `
+				
+					<div class="toolbar-history-back-button"></div>
+					<div class="toolbar-history-forward-button"></div>
+					<button type="button" class="toolbar-save-button edit-contact-save-button">Spara</button>
+				`
+				let div = document.createElement('div');
+				div.innerHTML = html;
+				toolbarHistorySection.append(div);
+			}
+
+		
 
 }
 
@@ -358,11 +372,12 @@ window.addEventListener('click', e => {
 
 			//localStorage.clear();
 			console.log(localStorage);
-
+			
+			
 			//************************************** */
 
 
-			document.getElementById("aside-container").style.display = "none";
+			//document.getElementById("aside-container").style.display = "none";
 			displayContacts();
 		}
 	});

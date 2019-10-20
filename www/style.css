@@ -24,7 +24,6 @@ header{
 .add-contact-button{
     font-family: 'Gloria Hallelujah', cursive;
     float:right;
-    border:solid 1px black;
     margin-top:40px;
     margin-right:150px;
     cursor:pointer;
