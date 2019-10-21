@@ -289,6 +289,11 @@ window.addEventListener('click', e => {
 		}
 		let toolbarSaveButton = createElement(aside, 'button', 'Spara', 'class', 'toolbar-save-button edit-contact-save-button');
 		toolbarSaveButton.setAttribute('type','button');
+/*
+		versionCounter= contactToEdit.editVersion;
+		editHistoryHtml(versionCounter);	
+		*/
+		
 	}
 });
 
