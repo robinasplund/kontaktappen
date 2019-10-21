@@ -116,31 +116,44 @@ section{
 /******** ASIDE ********/
 
 #aside-container{
-    background-color:#94c7ae;
+    background-color:#339966;
     width:20%;
     min-height:600px;
     display:inline-block;
     vertical-align:top;
     display:none;
     text-align:center;
-    padding-top:50px;
+}
+.toolbar-input-container{
+    /*border:solid black 1px;*/
+
 }
 
-.toolbar-name{
+.toolbar-close-button{
+    float:right;   
+    width:20px;
+    height:20px;
+    border:solid #339966 1px;
+    margin-top:10px;
+    margin-right:20px;
+    margin-bottom:30px;
+    cursor:pointer;
+    background-image: url('./remove-icon.png');
+    background-repeat: no-repeat;
+}
+
+.toolbar-input{
     width:80%;
+}
 
-}
-.toolbar-phone{
-    width:80%; 
-}
-.toolbar-email{
-    width:80%;  
-}
 .toolbar-save-button{
     display:block;
     margin:auto;
-    margin-top:20px;
+    margin-top:40px;
     cursor:pointer;
+}
+.toolbar-success{
+    border:solid black 1px;
 }
 
 

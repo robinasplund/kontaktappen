@@ -1,5 +1,5 @@
 
-//localStorage.clear();
+localStorage.clear();
 
 function createElement(daddyElement, element, innerHTMLString, attribute, attributeName) {
 	element = document.createElement(element);
@@ -116,26 +116,28 @@ window.addEventListener('click', e => {
 
 function addContactForm(){
 
-	document.getElementById("aside-container").style.display = "inline-block";
-	document.getElementById("aside-container").innerHTML = "";
-
-	let toolbarName = createElement(aside, 'input', '', 'class', 'toolbar-name');
-	toolbarName.setAttribute('type','text');
-	toolbarName.setAttribute('placeholder','namn');
-
-	for(let i=0; i<3; i++){
-		let toolbarPhone = createElement(aside, 'input', '', 'class', 'toolbar-phone toolbar-phone'+i);
-		toolbarPhone.setAttribute('type','text');
-		toolbarPhone.setAttribute('placeholder','telefonnummer');
-	}
-	for(let i=0; i<3; i++){
-		let toolbarEmail = createElement(aside, 'input', '', 'class', 'toolbar-email toolbar-email'+i);
-		toolbarEmail.setAttribute('type','text');
-		toolbarEmail.setAttribute('placeholder','emailadress');
-	}
-	let toolbarSaveButton = createElement(aside, 'button', 'Spara', 'class', 'toolbar-save-button add-contact-save-button');
-	toolbarSaveButton.setAttribute('type','button');
+	aside.style.display = "inline-block";
+	aside.innerHTML = "";	
+	let html = `<div class="toolbar-input-container">
+					<div class="toolbar-close-button"></div>
+					<input class="toolbar-input toolbar-name" type="text" placeholder="Namn">
+					<input class="toolbar-input toolbar-phone1" type="text" placeholder="Telefon nummer">
+					<input class="toolbar-input toolbar-phone2" type="text" placeholder="Telefon nummer">
+					<input class="toolbar-input toolbar-phone3" type="text" placeholder="Telefon nummer">
+					<input class="toolbar-input toolbar-email1" type="text" placeholder="Email adress">
+					<input class="toolbar-input toolbar-email2" type="text" placeholder="Email adress">
+					<input class="toolbar-input toolbar-email3" type="text" placeholder="Email adress">
+					<button class="toolbar-save-button add-contact-save-button">Spara</button>
+				</div>`
+	aside.innerHTML=html;
 }
+
+//Toolbar close button
+window.addEventListener('click', e => {
+	if(e.target.closest('.toolbar-close-button')){		
+		document.getElementById("aside-container").style.display = "none";
+	}
+});
 
 // Add-contact save button logic
 window.addEventListener('click', e =>{
@@ -143,12 +145,12 @@ window.addEventListener('click', e =>{
 
 		let ContactId = idGenerator; 
 		let Name = document.querySelector('.toolbar-name').value;	
-		let Phone1 = document.querySelector('.toolbar-phone0').value;		
-		let Phone2 = document.querySelector('.toolbar-phone1').value;
-		let Phone3 = document.querySelector('.toolbar-phone2').value;
-		let Email1 = document.querySelector('.toolbar-email0').value;
-		let Email2 = document.querySelector('.toolbar-email1').value;
-		let Email3 = document.querySelector('.toolbar-email2').value;
+		let Phone1 = document.querySelector('.toolbar-phone1').value;		
+		let Phone2 = document.querySelector('.toolbar-phone2').value;
+		let Phone3 = document.querySelector('.toolbar-phone3').value;
+		let Email1 = document.querySelector('.toolbar-email1').value;
+		let Email2 = document.querySelector('.toolbar-email2').value;
+		let Email3 = document.querySelector('.toolbar-email3').value;
 		
 		let arrayOfPhonenumbers=[Phone1,Phone2,Phone3];
 		let arrayOfPhonenumbers2 = arrayOfPhonenumbers.filter(function(v){return v!==''});
@@ -163,8 +165,7 @@ window.addEventListener('click', e =>{
 		let newContact2 = JSON.stringify(newContact);			
 		localStorage.setItem(editVersionString,newContact2);
 
-		document.getElementById("aside-container").style.display = "none";
-	
+		console.log(localStorage);
 		displayContacts(); 		
 	}
 });
@@ -183,29 +184,35 @@ let loadEditsHistory;
 window.addEventListener('click', e => {
 	if(e.target.closest('.edit-contact-button')){		
 			
-		document.getElementById("aside-container").style.display = "inline-block";
-		document.getElementById("aside-container").innerHTML = "";
-
 		contactToEdit =arrayOfContacts.filter(function(object){
 			return object.id == e.target.id;
 		})[0];
 
-		let toolbarName = createElement(aside, 'input', '', 'class', 'toolbar-name');
-		toolbarName.setAttribute('type','text');
-		toolbarName.setAttribute('value',contactToEdit.name);
-
-		for(let i=0; i<3; i++){
-			let toolbarPhone = createElement(aside, 'input', '', 'class', 'toolbar-phone toolbar-phone'+i);
-			toolbarPhone.setAttribute('type','text');
-			if (contactToEdit.phoneNumbers[i]) { toolbarPhone.setAttribute('value',contactToEdit.phoneNumbers[i]); }
-			else{ toolbarPhone.setAttribute('placeholder','telefonnummer'); }		
-		}
-		for(let i=0; i<3; i++){
-			let toolbarEmail = createElement(aside, 'input', '', 'class', 'toolbar-email toolbar-email'+i);
-			toolbarEmail.setAttribute('type','text');
-			if (contactToEdit.emails[i]) { toolbarEmail.setAttribute('value',contactToEdit.emails[i]); }
-			else{ toolbarEmail.setAttribute('placeholder','emailadress'); }		
-		}
+		aside.style.display = "inline-block";
+		aside.innerHTML = "";	
+		let html = `<div class="toolbar-input-container">
+						<div class="toolbar-close-button"></div>
+						<input class="toolbar-input toolbar-name" type="text" value="${contactToEdit.name}">
+						<input class="toolbar-input toolbar-phone1" type="text" 
+							value="${contactToEdit.phoneNumbers[0]? contactToEdit.phoneNumbers[0]:''}"
+							placeholder="${contactToEdit.phoneNumbers[0]? '':'Telefon nummer'}">
+						<input class="toolbar-input toolbar-phone2" type="text" 
+							value="${contactToEdit.phoneNumbers[1]? contactToEdit.phoneNumbers[1]:''}"
+							placeholder="${contactToEdit.phoneNumbers[1]? '':'Telefon nummer'}">
+						<input class="toolbar-input toolbar-phone3" type="text" 
+							value="${contactToEdit.phoneNumbers[2]? contactToEdit.phoneNumbers[2]:''}"
+							placeholder="${contactToEdit.phoneNumbers[2]? '':'Telefon nummer'}">
+						<input class="toolbar-input toolbar-email1" type="text" 
+							value="${contactToEdit.emails[0]? contactToEdit.emails[0]:''}"
+							placeholder="${contactToEdit.emails[0]? '':'Email adress'}">
+						<input class="toolbar-input toolbar-email2" type="text" 
+							value="${contactToEdit.emails[1]? contactToEdit.emails[1]:''}"
+							placeholder="${contactToEdit.emails[1]? '':'Email adress'}">
+						<input class="toolbar-input toolbar-email3" type="text" 
+							value="${contactToEdit.emails[2]? contactToEdit.emails[2]:''}"
+							placeholder="${contactToEdit.emails[2]? '':'Email adress'}">					
+					</div>`
+		aside.innerHTML=html;
 
 		versionCounter= contactToEdit.editVersion;
 		editHistoryHtml(versionCounter);	
@@ -229,11 +236,10 @@ window.addEventListener('click', e => {
 });
 
 function editHistoryHtml(versionCounter){
-	
+
 	let toolbarHistorySection =createElement(aside, 'div', '', 'id', 'toolbar-history-section');
 	loadEditsHistory = JSON.parse(localStorage.getItem(contactToEdit.id+'.'+versionCounter));
 			
-	if(loadEditsHistory){
 		let html = `
 			<div id="toolbar-history-section-inner">
 			<div class="upload-history-button"></div>
@@ -252,48 +258,38 @@ function editHistoryHtml(versionCounter){
 		let div = document.createElement('div');
 		div.innerHTML = html;
 		toolbarHistorySection.append(div);
-	}
-	else{
-		let html = `				
-			<div class="toolbar-history-back-button"></div>
-			<div class="toolbar-history-forward-button"></div>
-			<button type="button" class="toolbar-save-button edit-contact-save-button">Spara</button>
-		`
-		let div = document.createElement('div');
-		div.innerHTML = html;
-		toolbarHistorySection.append(div);
-	}
 }
 
 // Ladda upp history
 window.addEventListener('click', e => {
-	if(e.target.closest('.upload-history-button')){				
-
-		document.getElementById("aside-container").innerHTML = "";
-	
-		let toolbarName = createElement(aside, 'input', '', 'class', 'toolbar-name');
-		toolbarName.setAttribute('type','text');
-		toolbarName.setAttribute('value',loadEditsHistory.name);
-	
-		for(let i=0; i<3; i++){
-			let toolbarPhone = createElement(aside, 'input', '', 'class', 'toolbar-phone toolbar-phone'+i);
-			toolbarPhone.setAttribute('type','text');
-			if (loadEditsHistory.phoneNumbers[i]) { toolbarPhone.setAttribute('value',loadEditsHistory.phoneNumbers[i]); }
-			else{ toolbarPhone.setAttribute('placeholder','telefonnummer'); }		
-		}
-		for(let i=0; i<3; i++){
-			let toolbarEmail = createElement(aside, 'input', '', 'class', 'toolbar-email toolbar-email'+i);
-			toolbarEmail.setAttribute('type','text');
-			if (loadEditsHistory.emails[i]) { toolbarEmail.setAttribute('value',loadEditsHistory.emails[i]); }
-			else{ toolbarEmail.setAttribute('placeholder','emailadress'); }		
-		}
-		let toolbarSaveButton = createElement(aside, 'button', 'Spara', 'class', 'toolbar-save-button edit-contact-save-button');
-		toolbarSaveButton.setAttribute('type','button');
-/*
-		versionCounter= contactToEdit.editVersion;
-		editHistoryHtml(versionCounter);	
-		*/
+	if(e.target.closest('.upload-history-button')){		
 		
+		aside.innerHTML = "";	
+		let html = `<div class="toolbar-input-container">
+						<div class="toolbar-close-button"></div>
+						<input class="toolbar-input toolbar-name" type="text" value="${loadEditsHistory.name}">
+						<input class="toolbar-input toolbar-phone1" type="text" 
+							value="${loadEditsHistory.phoneNumbers[0]? loadEditsHistory.phoneNumbers[0]:''}"
+							placeholder="${loadEditsHistory.phoneNumbers[0]? '':'Telefon nummer'}">
+						<input class="toolbar-input toolbar-phone2" type="text" 
+							value="${loadEditsHistory.phoneNumbers[1]? loadEditsHistory.phoneNumbers[1]:''}"
+							placeholder="${loadEditsHistory.phoneNumbers[1]? '':'Telefon nummer'}">
+						<input class="toolbar-input toolbar-phone3" type="text" 
+							value="${loadEditsHistory.phoneNumbers[2]? loadEditsHistory.phoneNumbers[2]:''}"
+							placeholder="${loadEditsHistory.phoneNumbers[2]? '':'Telefon nummer'}">
+						<input class="toolbar-input toolbar-email1" type="text" 
+							value="${loadEditsHistory.emails[0]? loadEditsHistory.emails[0]:''}"
+							placeholder="${loadEditsHistory.emails[0]? '':'Email adress'}">
+						<input class="toolbar-input toolbar-email2" type="text" 
+							value="${loadEditsHistory.emails[1]? loadEditsHistory.emails[1]:''}"
+							placeholder="${loadEditsHistory.emails[1]? '':'Email adress'}">
+						<input class="toolbar-input toolbar-email3" type="text" 
+							value="${loadEditsHistory.emails[2]? loadEditsHistory.emails[2]:''}"
+							placeholder="${loadEditsHistory.emails[2]? '':'Email adress'}">					
+					</div>`
+		aside.innerHTML=html;
+
+		editHistoryHtml(versionCounter);	
 	}
 });
 
@@ -302,12 +298,12 @@ window.addEventListener('click', e => {
 	if(e.target.closest('.edit-contact-save-button')){
 
 		let Name = document.querySelector('.toolbar-name').value;	
-		let Phone1 = document.querySelector('.toolbar-phone0').value;		
-		let Phone2 = document.querySelector('.toolbar-phone1').value;
-		let Phone3 = document.querySelector('.toolbar-phone2').value;
-		let Email1 = document.querySelector('.toolbar-email0').value;
-		let Email2 = document.querySelector('.toolbar-email1').value;
-		let Email3 = document.querySelector('.toolbar-email2').value;
+		let Phone1 = document.querySelector('.toolbar-phone1').value;		
+		let Phone2 = document.querySelector('.toolbar-phone2').value;
+		let Phone3 = document.querySelector('.toolbar-phone3').value;
+		let Email1 = document.querySelector('.toolbar-email1').value;
+		let Email2 = document.querySelector('.toolbar-email2').value;
+		let Email3 = document.querySelector('.toolbar-email3').value;
 			
 		let arrayOfPhonenumbers=[Phone1,Phone2,Phone3];
 		let arrayOfPhonenumbers2 = arrayOfPhonenumbers.filter(function(v){return v!==''});
@@ -324,8 +320,7 @@ window.addEventListener('click', e => {
 		let editedContact2 = JSON.stringify(editedContact);			
 		localStorage.setItem(editVersionString,editedContact2);
 
-		document.getElementById("aside-container").style.display = "none";
-
+		console.log(localStorage);	
 		displayContacts();
 	}
 });
