@@ -326,7 +326,12 @@ window.addEventListener('click', e => {
 		localStorage.setItem(editVersionString,editedContact2);
 
 		//console.log(localStorage);	
-		addEditForm();
+		//addEditForm();
+
+		document.getElementById("toolbar-history-section").remove();
+	versionCounter= contactToEdit.editVersion;
+	editHistoryHtml(versionCounter);
+
 		displayContacts();
 	}
 });
