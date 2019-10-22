@@ -118,7 +118,7 @@ section{
 #aside-container{
     background-color:#339966;
     width:20%;
-    min-height:600px;
+    min-height:650px;
     display:inline-block;
     vertical-align:top;
     display:none;
@@ -129,17 +129,16 @@ section{
 
 }
 
-.toolbar-close-button{
-    float:right;   
+.toolbar-close-button{ 
     width:20px;
     height:20px;
-    border:solid #339966 1px;
     margin-top:10px;
-    margin-right:20px;
     margin-bottom:30px;
     cursor:pointer;
     background-image: url('./remove-icon.png');
     background-repeat: no-repeat;
+    position:relative;
+    left:260px;
 }
 
 .toolbar-input{
@@ -168,7 +167,7 @@ section{
     
 }
 #toolbar-history-section-inner{
-    background-color:#339966;
+    background-color:#92b6a4;
     width:100%;
     margin:auto;
     margin-top:40px;
