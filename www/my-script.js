@@ -325,12 +325,9 @@ window.addEventListener('click', e => {
 		let editedContact2 = JSON.stringify(editedContact);			
 		localStorage.setItem(editVersionString,editedContact2);
 
-		//console.log(localStorage);	
-		//addEditForm();
-
 		document.getElementById("toolbar-history-section").remove();
-	versionCounter= contactToEdit.editVersion;
-	editHistoryHtml(versionCounter);
+		versionCounter= contactToEdit.editVersion;
+		editHistoryHtml(versionCounter);
 
 		displayContacts();
 	}
