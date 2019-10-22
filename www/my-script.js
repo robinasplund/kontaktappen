@@ -183,41 +183,46 @@ let loadEditsHistory;
 
 window.addEventListener('click', e => {
 	if(e.target.closest('.edit-contact-button')){		
-			
+
 		contactToEdit =arrayOfContacts.filter(function(object){
 			return object.id == e.target.id;
 		})[0];
-
-		aside.style.display = "inline-block";
-		aside.innerHTML = "";	
-		let html = `<div class="toolbar-input-container">
-						<div class="toolbar-close-button"></div>
-						<input class="toolbar-input toolbar-name" type="text" value="${contactToEdit.name}">
-						<input class="toolbar-input toolbar-phone1" type="text" 
-							value="${contactToEdit.phoneNumbers[0]? contactToEdit.phoneNumbers[0]:''}"
-							placeholder="${contactToEdit.phoneNumbers[0]? '':'Telefon nummer'}">
-						<input class="toolbar-input toolbar-phone2" type="text" 
-							value="${contactToEdit.phoneNumbers[1]? contactToEdit.phoneNumbers[1]:''}"
-							placeholder="${contactToEdit.phoneNumbers[1]? '':'Telefon nummer'}">
-						<input class="toolbar-input toolbar-phone3" type="text" 
-							value="${contactToEdit.phoneNumbers[2]? contactToEdit.phoneNumbers[2]:''}"
-							placeholder="${contactToEdit.phoneNumbers[2]? '':'Telefon nummer'}">
-						<input class="toolbar-input toolbar-email1" type="text" 
-							value="${contactToEdit.emails[0]? contactToEdit.emails[0]:''}"
-							placeholder="${contactToEdit.emails[0]? '':'Email adress'}">
-						<input class="toolbar-input toolbar-email2" type="text" 
-							value="${contactToEdit.emails[1]? contactToEdit.emails[1]:''}"
-							placeholder="${contactToEdit.emails[1]? '':'Email adress'}">
-						<input class="toolbar-input toolbar-email3" type="text" 
-							value="${contactToEdit.emails[2]? contactToEdit.emails[2]:''}"
-							placeholder="${contactToEdit.emails[2]? '':'Email adress'}">					
-					</div>`
-		aside.innerHTML=html;
-
-		versionCounter= contactToEdit.editVersion;
-		editHistoryHtml(versionCounter);	
+		addEditForm();	
 	}	
 });
+
+function addEditForm(){
+
+	aside.style.display = "inline-block";
+	aside.innerHTML = "";	
+	let html = `<div class="toolbar-input-container">
+					<div class="toolbar-close-button"></div>
+					<input class="toolbar-input toolbar-name" type="text" value="${contactToEdit.name}">
+					<input class="toolbar-input toolbar-phone1" type="text" 
+						value="${contactToEdit.phoneNumbers[0]? contactToEdit.phoneNumbers[0]:''}"
+						placeholder="${contactToEdit.phoneNumbers[0]? '':'Telefon nummer'}">
+					<input class="toolbar-input toolbar-phone2" type="text" 
+						value="${contactToEdit.phoneNumbers[1]? contactToEdit.phoneNumbers[1]:''}"
+						placeholder="${contactToEdit.phoneNumbers[1]? '':'Telefon nummer'}">
+					<input class="toolbar-input toolbar-phone3" type="text" 
+						value="${contactToEdit.phoneNumbers[2]? contactToEdit.phoneNumbers[2]:''}"
+						placeholder="${contactToEdit.phoneNumbers[2]? '':'Telefon nummer'}">
+					<input class="toolbar-input toolbar-email1" type="text" 
+						value="${contactToEdit.emails[0]? contactToEdit.emails[0]:''}"
+						placeholder="${contactToEdit.emails[0]? '':'Email adress'}">
+					<input class="toolbar-input toolbar-email2" type="text" 
+						value="${contactToEdit.emails[1]? contactToEdit.emails[1]:''}"
+						placeholder="${contactToEdit.emails[1]? '':'Email adress'}">
+					<input class="toolbar-input toolbar-email3" type="text" 
+						value="${contactToEdit.emails[2]? contactToEdit.emails[2]:''}"
+						placeholder="${contactToEdit.emails[2]? '':'Email adress'}">					
+				</div>`
+	aside.innerHTML=html;
+
+	versionCounter= contactToEdit.editVersion;
+	editHistoryHtml(versionCounter);	
+}
+
 
 // BACK AND FORWARD BUTTONS
 window.addEventListener('click', e => {
@@ -320,7 +325,8 @@ window.addEventListener('click', e => {
 		let editedContact2 = JSON.stringify(editedContact);			
 		localStorage.setItem(editVersionString,editedContact2);
 
-		console.log(localStorage);	
+		//console.log(localStorage);	
+		addEditForm();
 		displayContacts();
 	}
 });
