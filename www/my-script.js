@@ -102,9 +102,6 @@ window.addEventListener('click', e => {
 });
 
 
-
-
-
 /********** ADD CONTACTS **********/
 
 //add contact button logic
@@ -127,6 +124,7 @@ function addContactForm(){
 					<input class="toolbar-input toolbar-email1" type="text" placeholder="Email adress">
 					<input class="toolbar-input toolbar-email2" type="text" placeholder="Email adress">
 					<input class="toolbar-input toolbar-email3" type="text" placeholder="Email adress">
+					<p id="noname-error-message">En kontakt behöver ett namn</p>
 					<button class="toolbar-save-button add-contact-save-button">Spara</button>
 				</div>`
 	aside.innerHTML=html;
@@ -143,36 +141,39 @@ window.addEventListener('click', e => {
 window.addEventListener('click', e =>{
   if(e.target.closest('.add-contact-save-button')){
 
-		let ContactId = idGenerator; 
-		let Name = document.querySelector('.toolbar-name').value;	
+	document.getElementById('noname-error-message').style.display= 'none';
+
+	let ContactId = idGenerator; 
+	let Name = document.querySelector('.toolbar-name').value;	
+	if(Name){
 		let Phone1 = document.querySelector('.toolbar-phone1').value;		
 		let Phone2 = document.querySelector('.toolbar-phone2').value;
 		let Phone3 = document.querySelector('.toolbar-phone3').value;
 		let Email1 = document.querySelector('.toolbar-email1').value;
 		let Email2 = document.querySelector('.toolbar-email2').value;
 		let Email3 = document.querySelector('.toolbar-email3').value;
-		
+			
 		let arrayOfPhonenumbers=[Phone1,Phone2,Phone3];
 		let arrayOfPhonenumbers2 = arrayOfPhonenumbers.filter(function(v){return v!==''});
 		let arrayOfEmails=[Email1,Email2,Email3];
 		let arrayOfEmails2 = arrayOfEmails.filter(function(v){return v!==''});
-	
+		
 		let newContact = new createContact(ContactId,Name,arrayOfPhonenumbers2,arrayOfEmails2,'0');
 		arrayOfContacts.push(newContact); 
 		idGenerator++;
-			
+				
 		let editVersionString =newContact.id+'.'+newContact.editVersion;
 		let newContact2 = JSON.stringify(newContact);			
 		localStorage.setItem(editVersionString,newContact2);
 
 		console.log(localStorage);
-		displayContacts(); 		
+		displayContacts(); 	
+		}
+	else{
+		document.getElementById('noname-error-message').style.display= 'block';
+		}	
 	}
 });
-
-
-
-
 
 
 /********** EDIT CONTACTS **********/

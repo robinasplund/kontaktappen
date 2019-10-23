@@ -4,9 +4,10 @@ body{
 }
 
 header{
-    background-color:#339966;
+    background-color:#f5f5dc;
     position:fixed;
     width:100%;
+    z-index: 2;
 }
 .logo{
     display:inline-block;
@@ -33,10 +34,11 @@ header{
 
 
 section{
-    width:79%;
+    width:77%;
     display:inline-block;
-    margin-top:120px;
-    margin-left:1%;
+    margin-top:180px;
+    margin-left:3%;
+    z-index: -1;
 }
 
 
@@ -118,7 +120,7 @@ section{
 /******** ASIDE ********/
 
 #aside-container{
-    background-color:#339966;
+    background-color:#f5f5dc;
     width:20%;
     min-height:650px;
     display:inline-block;
@@ -157,6 +159,10 @@ section{
 }
 .toolbar-success{
     border:solid black 1px;
+}
+#noname-error-message{
+    color:red;
+    display:none;
 }
 
 
